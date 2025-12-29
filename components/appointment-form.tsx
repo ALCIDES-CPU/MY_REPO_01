@@ -30,7 +30,7 @@ export function AppointmentForm() {
     numeroDocumento: "",
     email: "",
     telefone: "",
-    paisResidencia: "",
+    paisNacionalidade: "",
 
     // Tipo de Serviço
     tipoServico: "",
