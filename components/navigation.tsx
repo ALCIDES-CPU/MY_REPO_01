@@ -9,11 +9,11 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="bg-primary text-primary-foreground shadow-md sticky top-0 z-50">
+    <nav className="text-primary-foreground shadow-md sticky top-0 z-50 bg-[rgba(28,4,58,1)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center gap-3">
-            <Image src="/logo-aima.png" alt="AIMA Logo" width={120} height={40} className="h-10 w-auto" />
+            <Image src="/logo-aima.png" alt="AIMA Logo" width={200} height={60} className="h-12 w-auto" />
           </Link>
 
           {/* Desktop Menu */}

@@ -15,7 +15,7 @@ export default function HomePage() {
         {/* Hero Section */}
         <section className="relative h-[500px] md:h-[600px]">
           <Image
-            src="https://aima.gov.pt/media/pages/home/481e7f24bc-1706827832/europa_1-1200x-q65.jpg"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/BANNER%20SITE-3uM7QEd1d24aVOB1e2ZMiGQKiWeYkE.jpg"
             alt="Banner AIMA - Agência para a Integração, Migrações e Asilo"
             fill
             className="object-cover"
@@ -23,7 +23,7 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 flex items-center justify-center">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 text-balance">
+              <h1 className="text-4xl font-bold mb-6 text-balance text-background md:text-7xl">
                 Agendamento de Serviços AIMA
               </h1>
               <p className="text-lg md:text-2xl text-white/90 mb-8 leading-relaxed text-pretty max-w-3xl mx-auto">
