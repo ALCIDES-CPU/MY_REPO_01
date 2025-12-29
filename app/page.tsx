@@ -1,0 +1,138 @@
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
+import { Calendar, FileText, CreditCard, CheckCircle, Clock, Shield } from "lucide-react"
+
+export default function HomePage() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navigation />
+
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="bg-gradient-to-b from-primary/5 to-background py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto">
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
+                Agendamento de Serviços AIMA
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed text-pretty">
+                Agende o seu atendimento de forma rápida e segura. Submita documentos, efetue pagamentos e acompanhe o
+                status do seu agendamento online.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild size="lg" className="text-lg">
+                  <Link href="/agendar">Agendar Agora</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="text-lg bg-transparent">
+                  <Link href="/servicos">Ver Serviços</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="py-16 md:py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-center mb-12">Como Funciona</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Card>
+                <CardHeader>
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <Calendar className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle>1. Agende o Atendimento</CardTitle>
+                  <CardDescription>Escolha o tipo de serviço, data e local de sua preferência</CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <FileText className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle>2. Submeta Documentos</CardTitle>
+                  <CardDescription>Faça upload dos documentos necessários de forma segura</CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <CreditCard className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle>3. Efetue o Pagamento</CardTitle>
+                  <CardDescription>Pagamento seguro online quando aplicável ao serviço</CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Benefits Section */}
+        <section className="py-16 md:py-20 bg-muted/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-center mb-12">Vantagens da Plataforma</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-accent" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">Rápido e Conveniente</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Agende o seu atendimento a qualquer hora, sem filas
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <Clock className="w-6 h-6 text-accent" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">Acompanhamento em Tempo Real</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Consulte o status do seu agendamento a qualquer momento
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <Shield className="w-6 h-6 text-accent" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">Seguro e Confiável</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Seus dados e documentos protegidos com criptografia
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 md:py-20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold mb-6">Pronto para Agendar?</h2>
+            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+              Comece agora e garanta o seu atendimento na AIMA
+            </p>
+            <Button asChild size="lg" className="text-lg">
+              <Link href="/agendar">Agendar Atendimento</Link>
+            </Button>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  )
+}
