@@ -17,8 +17,8 @@ export default function ConfirmacaoPage() {
               <div className="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
                 <CheckCircle className="w-12 h-12 text-green-600" />
               </div>
-              <CardTitle className="text-3xl">Agendamento Confirmado!</CardTitle>
-              <CardDescription className="text-base">O seu agendamento foi processado com sucesso</CardDescription>
+              <CardTitle className="text-3xl">Agendamento pendente a confirmação de pagamento!</CardTitle>
+              <CardDescription className="text-base">O seu agendamento foi processado com sucesso, estamos confirmando o seu pagamento</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="bg-muted/50 p-6 rounded-lg space-y-4">

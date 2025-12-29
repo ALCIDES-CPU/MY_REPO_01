@@ -29,13 +29,7 @@ export function Footer() {
               height={60}
               className="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity col-span-2 md:col-span-1"
             />
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/PT%202020-NYPbX1c8EozgqLuSF7zgA6ECm8OnXC.png"
-              alt="COMPETE 2020"
-              width={120}
-              height={60}
-              className="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity"
-            />
+            
           </div>
         </div>
 
