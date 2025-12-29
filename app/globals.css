@@ -122,3 +122,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Adicionando estilos para botões em formato pílula */
+@layer components {
+  button,
+  .button,
+  [role="button"] {
+    @apply rounded-full;
+  }
+}

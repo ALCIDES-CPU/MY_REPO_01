@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 
@@ -12,10 +13,7 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary-foreground/10 rounded flex items-center justify-center">
-              <span className="text-xl font-bold">AIMA</span>
-            </div>
-            <span className="font-semibold text-lg hidden sm:block">Agendamento de Serviços</span>
+            <Image src="/logo-aima.png" alt="AIMA Logo" width={120} height={40} className="h-10 w-auto" />
           </Link>
 
           {/* Desktop Menu */}

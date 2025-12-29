@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Navigation } from "@/components/navigation"
@@ -12,21 +13,33 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-primary/5 to-background py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
+        <section className="relative h-[500px] md:h-[600px]">
+          <Image
+            src="https://aima.gov.pt/media/pages/home/481e7f24bc-1706827832/europa_1-1200x-q65.jpg"
+            alt="Banner AIMA - Agência para a Integração, Migrações e Asilo"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 flex items-center justify-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 text-balance">
                 Agendamento de Serviços AIMA
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed text-pretty">
+              <p className="text-lg md:text-2xl text-white/90 mb-8 leading-relaxed text-pretty max-w-3xl mx-auto">
                 Agende o seu atendimento de forma rápida e segura. Submita documentos, efetue pagamentos e acompanhe o
                 status do seu agendamento online.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" className="text-lg">
+                <Button asChild size="lg" className="text-lg rounded-full">
                   <Link href="/agendar">Agendar Agora</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="text-lg bg-transparent">
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="text-lg bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 rounded-full"
+                >
                   <Link href="/servicos">Ver Serviços</Link>
                 </Button>
               </div>
@@ -125,7 +138,7 @@ export default function HomePage() {
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               Comece agora e garanta o seu atendimento na AIMA
             </p>
-            <Button asChild size="lg" className="text-lg">
+            <Button asChild size="lg" className="text-lg rounded-full">
               <Link href="/agendar">Agendar Atendimento</Link>
             </Button>
           </div>
