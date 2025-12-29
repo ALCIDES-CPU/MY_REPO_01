@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 
-const DODOPAYMENTS_API_KEY = "JJuyAB7P2KyAuOcw.mjagRW4txn3gjSA3Mq3Z_miU9Va09i7uF6QXemyG9zIS98ju"
-const DODOPAYMENTS_API_URL = "https://api.dodopayments.com/v1/payments"
+const WHOP_API_KEY = "apik_XYhJuzI4PRtQc_C4057542_C_f9caa70d40b2c3085ddf0a7ff12a5c152093b58bef80123e3baced336a5329"
+const WHOP_API_URL = "https://api.whop.com/v1"
 
 export async function POST(request: Request) {
   try {
@@ -13,48 +13,45 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, error: "Dados de pagamento inválidos" }, { status: 400 })
     }
 
-    // Process payment with DodoPayments API
-    const paymentResponse = await fetch(DODOPAYMENTS_API_URL, {
+    const checkoutResponse = await fetch(`${WHOP_API_URL}/checkout-sessions`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${DODOPAYMENTS_API_KEY}`,
+        Authorization: `Bearer ${WHOP_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         amount: Math.round(amount * 100), // Convert to cents
-        currency: currency,
-        description: `AIMA Appointment - ${appointmentData?.service || "Service"}`,
+        currency: currency.toLowerCase(),
         metadata: {
           service: appointmentData?.service || "AIMA Appointment",
           timestamp: new Date().toISOString(),
         },
+        success_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/confirmacao`,
+        cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/pagamento`,
       }),
     })
 
-    if (!paymentResponse.ok) {
-      const errorData = await paymentResponse.json().catch(() => ({}))
-      console.error("[v0] DodoPayments API error:", errorData)
+    if (!checkoutResponse.ok) {
+      const errorData = await checkoutResponse.json().catch(() => ({}))
+      console.error("[v0] Whop API error:", errorData)
       return NextResponse.json(
         {
           success: false,
-          error: "Erro ao processar pagamento com DodoPayments",
+          error: "Erro ao processar pagamento com Whop",
         },
         { status: 500 },
       )
     }
 
-    const paymentData = await paymentResponse.json()
-    console.log("[v0] Payment processed successfully:", paymentData)
+    const checkoutData = await checkoutResponse.json()
+    console.log("[v0] Checkout session created successfully:", checkoutData)
 
-    // Here you would typically:
-    // 1. Save payment details to database
-    // 2. Send confirmation email
-    // 3. Update appointment status
-
+    // Return the checkout URL for redirect
     return NextResponse.json({
       success: true,
-      paymentId: paymentData.id,
-      message: "Pagamento processado com sucesso",
+      checkoutUrl: checkoutData.url,
+      sessionId: checkoutData.id,
+      message: "Sessão de pagamento criada com sucesso",
     })
   } catch (error) {
     console.error("[v0] Payment processing error:", error)
