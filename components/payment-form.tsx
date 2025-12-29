@@ -7,7 +7,8 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { CheckCircle, Loader2, CreditCard, Shield, Euro } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-const PAYMENT_AMOUNT = 58.88
+// Por defeito, usar o preço do Agendamento Geral
+const PAYMENT_AMOUNT = 39.1
 
 export function PaymentForm() {
   const [isProcessing, setIsProcessing] = useState(false)
@@ -88,14 +89,14 @@ export function PaymentForm() {
             </div>
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-muted-foreground">Taxa de processamento:</span>
-              <span className="font-medium">{PAYMENT_AMOUNT.toFixed(2)} EUR</span>
+              <span className="font-medium">{PAYMENT_AMOUNT.toFixed(2).replace(".", ",")} €</span>
             </div>
             <div className="border-t border-border pt-2 mt-2">
               <div className="flex justify-between items-center">
                 <span className="text-lg font-semibold">Total:</span>
                 <span className="text-2xl font-bold text-primary flex items-center gap-1">
                   <Euro className="w-5 h-5" />
-                  {PAYMENT_AMOUNT.toFixed(2)}
+                  {PAYMENT_AMOUNT.toFixed(2).replace(".", ",")}
                 </span>
               </div>
             </div>
@@ -104,8 +105,8 @@ export function PaymentForm() {
           <Alert>
             <Shield className="h-4 w-4" />
             <AlertDescription>
-              Pagamento processado de forma segura através da plataforma DodoPayments. Os seus dados estão protegidos
-              com encriptação de ponta a ponta.
+              Pagamento processado de forma segura através da plataforma Whop. Os seus dados estão protegidos com
+              encriptação de ponta a ponta.
             </AlertDescription>
           </Alert>
         </CardContent>
@@ -128,7 +129,7 @@ export function PaymentForm() {
               <div className="flex items-start gap-3">
                 <Shield className="w-5 h-5 text-primary mt-0.5" />
                 <div className="flex-1">
-                  <h4 className="font-semibold text-sm mb-1">Pagamento Seguro via DodoPayments</h4>
+                  <h4 className="font-semibold text-sm mb-1">Pagamento Seguro via Whop</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     A transação será processada de forma segura. Após a confirmação, receberá um e-mail com os detalhes
                     do seu agendamento.
@@ -145,7 +146,7 @@ export function PaymentForm() {
               ) : (
                 <>
                   <CreditCard className="mr-2 h-5 w-5" />
-                  Pagar {PAYMENT_AMOUNT.toFixed(2)} EUR
+                  Pagar {PAYMENT_AMOUNT.toFixed(2).replace(".", ",")} €
                 </>
               )}
             </Button>
