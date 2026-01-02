@@ -1,24 +1,42 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { CheckCircle, Loader2, CreditCard, Shield, Euro } from "lucide-react"
-import { useRouter } from "next/navigation"
-
-// Por defeito, usar o preço do Agendamento Geral
-const PAYMENT_AMOUNT = 39.1
+import { CheckCircle, Loader2, CreditCard, Shield, Euro, AlertCircle } from "lucide-react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { getServicePrice, formatPrice, type ServiceType } from "@/lib/service-prices"
 
 export function PaymentForm() {
   const [isProcessing, setIsProcessing] = useState(false)
   const [paymentSuccess, setPaymentSuccess] = useState(false)
   const [paymentError, setPaymentError] = useState<string | null>(null)
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const serviceType = (searchParams.get("service") || "agendamento-geral") as ServiceType
+  const paymentAmount = getServicePrice(serviceType)
+  const [appointmentData, setAppointmentData] = useState<any>(null)
+
+  useEffect(() => {
+    const stored = sessionStorage.getItem("appointmentData")
+    if (stored) {
+      try {
+        const data = JSON.parse(stored)
+        setAppointmentData(data)
+        console.log("[v0] Loaded appointment data from sessionStorage:", data)
+      } catch (error) {
+        console.error("[v0] Error parsing appointment data:", error)
+      }
+    }
+  }, [])
 
   const handlePayment = async () => {
     setIsProcessing(true)
     setPaymentError(null)
+
+    console.log("[v0] Starting payment process for service:", serviceType, "amount:", paymentAmount)
 
     try {
       const response = await fetch("/api/process-payment", {
@@ -27,27 +45,35 @@ export function PaymentForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: PAYMENT_AMOUNT,
+          amount: paymentAmount,
           currency: "EUR",
           appointmentData: {
-            // This would come from previous form submission
-            service: "AIMA Appointment",
+            ...appointmentData,
+            service: serviceType,
+            servicePrice: paymentAmount,
           },
         }),
       })
 
       const data = await response.json()
+      console.log("[v0] Payment API response:", data)
 
       if (response.ok && data.success) {
-        setPaymentSuccess(true)
-        // Redirect to success page after a short delay
-        setTimeout(() => {
-          router.push("/confirmacao")
-        }, 2000)
+        if (data.checkoutUrl) {
+          console.log("[v0] Redirecting to Whop checkout:", data.checkoutUrl)
+          window.location.href = data.checkoutUrl
+        } else {
+          setPaymentSuccess(true)
+          setTimeout(() => {
+            router.push("/confirmacao")
+          }, 2000)
+        }
       } else {
         setPaymentError(data.error || "Erro ao processar o pagamento. Por favor, tente novamente.")
+        console.error("[v0] Payment failed:", data)
       }
     } catch (error) {
+      console.error("[v0] Payment error:", error)
       setPaymentError("Erro de conexão. Por favor, verifique a sua internet e tente novamente.")
     } finally {
       setIsProcessing(false)
@@ -85,22 +111,43 @@ export function PaymentForm() {
           <div className="bg-muted/50 p-4 rounded-lg">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-muted-foreground">Serviço:</span>
-              <span className="font-medium">Agendamento AIMA</span>
+              <span className="font-medium">
+                {serviceType === "agendamento-geral" && "Agendamento Geral AIMA"}
+                {serviceType === "renovacao-autorizacao" && "Renovação de Autorização de Residência"}
+                {serviceType === "primeira-autorizacao" && "Primeira Autorização de Residência"}
+                {serviceType === "reagrupamento-familiar" && "Reagrupamento Familiar"}
+                {serviceType === "informacao-consulta" && "Informação / Consulta"}
+                {serviceType === "outros" && "Outros Serviços"}
+              </span>
             </div>
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-muted-foreground">Taxa de processamento:</span>
-              <span className="font-medium">{PAYMENT_AMOUNT.toFixed(2).replace(".", ",")} €</span>
+              <span className="font-medium">{formatPrice(paymentAmount)}</span>
             </div>
             <div className="border-t border-border pt-2 mt-2">
               <div className="flex justify-between items-center">
                 <span className="text-lg font-semibold">Total:</span>
                 <span className="text-2xl font-bold text-primary flex items-center gap-1">
                   <Euro className="w-5 h-5" />
-                  {PAYMENT_AMOUNT.toFixed(2).replace(".", ",")}
+                  {formatPrice(paymentAmount).replace(" €", "")}
                 </span>
               </div>
             </div>
           </div>
+
+          {appointmentData && (
+            <div className="bg-primary/5 border border-primary/20 p-4 rounded-lg text-sm space-y-1">
+              <p>
+                <span className="font-semibold">Nome:</span> {appointmentData.nomeCompleto}
+              </p>
+              <p>
+                <span className="font-semibold">Email:</span> {appointmentData.email}
+              </p>
+              <p>
+                <span className="font-semibold">Telemóvel:</span> {appointmentData.telefone}
+              </p>
+            </div>
+          )}
 
           <Alert>
             <Shield className="h-4 w-4" />
@@ -120,6 +167,7 @@ export function PaymentForm() {
         <CardContent className="space-y-4">
           {paymentError && (
             <Alert variant="destructive">
+              <AlertCircle className="h-4 w-4" />
               <AlertDescription>{paymentError}</AlertDescription>
             </Alert>
           )}
@@ -146,7 +194,7 @@ export function PaymentForm() {
               ) : (
                 <>
                   <CreditCard className="mr-2 h-5 w-5" />
-                  Pagar {PAYMENT_AMOUNT.toFixed(2).replace(".", ",")} €
+                  Pagar {formatPrice(paymentAmount)}
                 </>
               )}
             </Button>

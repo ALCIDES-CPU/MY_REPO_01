@@ -9,19 +9,22 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { Progress } from "@/components/ui/progress"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { format } from "date-fns"
-import { ptBR } from "date-fns/locale"
 import { CalendarIcon, Upload, Loader2 } from "lucide-react"
+import { format } from "date-fns"
+import { pt } from "date-fns/locale"
 import { cn } from "@/lib/utils"
+import { getServicePrice, formatPrice, type ServiceType } from "@/lib/service-prices"
+import { useRouter } from "next/navigation"
 
 export function AppointmentForm() {
+  const router = useRouter()
   const [step, setStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [date, setDate] = useState<Date>()
 
-  // Form state
   const [formData, setFormData] = useState({
     // Dados Pessoais
     nomeCompleto: "",
@@ -30,10 +33,10 @@ export function AppointmentForm() {
     numeroDocumento: "",
     email: "",
     telefone: "",
-    paisNacionalidade: "",
+    paisResidencia: "",
 
     // Tipo de Serviço
-    tipoServico: "",
+    tipoServico: "" as ServiceType | "",
     outrosDetalhes: "",
 
     // Localização e Horário
@@ -66,29 +69,44 @@ export function AppointmentForm() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Here we would normally send data to API
-    // For now, we'll simulate a delay and move to payment
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    console.log("[v0] Form submitted with data:", formData)
 
-    setIsSubmitting(false)
-    // Redirect to payment would happen here
-    window.location.href = "/pagamento"
+    try {
+      // Store appointment data in sessionStorage
+      const appointmentData = {
+        ...formData,
+        appointmentDate: date?.toISOString(),
+        submittedAt: new Date().toISOString(),
+      }
+
+      sessionStorage.setItem("appointmentData", JSON.stringify(appointmentData))
+      console.log("[v0] Appointment data stored in sessionStorage")
+
+      // Simulate processing delay
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
+      // Redirect to payment with service type
+      const serviceType = formData.tipoServico || "agendamento-geral"
+      router.push(`/pagamento?service=${serviceType}`)
+    } catch (error) {
+      console.error("[v0] Error submitting form:", error)
+      alert("Erro ao submeter o formulário. Por favor, tente novamente.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
+  const progressPercentage = (step / 4) * 100
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="space-y-6">
       {/* Progress Indicator */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium">Passo {step} de 4</span>
-          <span className="text-sm text-muted-foreground">{Math.round((step / 4) * 100)}% completo</span>
+      <div className="space-y-2">
+        <div className="flex justify-between text-sm text-muted-foreground">
+          <span>Passo {step} de 4</span>
+          <span>{Math.round(progressPercentage)}%</span>
         </div>
-        <div className="w-full bg-muted rounded-full h-2">
-          <div
-            className="bg-primary h-2 rounded-full transition-all duration-300"
-            style={{ width: `${(step / 4) * 100}%` }}
-          />
-        </div>
+        <Progress value={progressPercentage} className="h-2" />
       </div>
 
       {/* Step 1: Dados Pessoais */}
@@ -96,7 +114,7 @@ export function AppointmentForm() {
         <Card>
           <CardHeader>
             <CardTitle>Dados Pessoais</CardTitle>
-            <CardDescription>Forneça as suas informações pessoais</CardDescription>
+            <CardDescription>Preencha os seus dados pessoais para o agendamento</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -218,43 +236,51 @@ export function AppointmentForm() {
         <Card>
           <CardHeader>
             <CardTitle>Tipo de Serviço</CardTitle>
-            <CardDescription>Selecione o serviço que necessita</CardDescription>
+            <CardDescription>Selecione o tipo de atendimento que necessita</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="tipoServico">
-                Serviço <span className="text-destructive">*</span>
+                Serviço Pretendido <span className="text-destructive">*</span>
               </Label>
               <Select
                 value={formData.tipoServico}
-                onValueChange={(value) => setFormData({ ...formData, tipoServico: value })}
+                onValueChange={(value) => setFormData({ ...formData, tipoServico: value as ServiceType })}
               >
                 <SelectTrigger id="tipoServico">
                   <SelectValue placeholder="Selecione o serviço" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="agendamento-geral">Agendamento Geral AIMA</SelectItem>
-                  <SelectItem value="renovacao-autorizacao">Renovação de Autorização de Residência</SelectItem>
-                  <SelectItem value="primeira-autorizacao">Primeira Autorização de Residência</SelectItem>
-                  <SelectItem value="reagrupamento-familiar">Reagrupamento Familiar</SelectItem>
-                  <SelectItem value="informacao-consulta">Informação / Consulta</SelectItem>
-                  <SelectItem value="outros">Outros</SelectItem>
+                  <SelectItem value="agendamento-geral">Agendamento Geral AIMA - 39,10 €</SelectItem>
+                  <SelectItem value="renovacao-autorizacao">
+                    Renovação de Autorização de Residência - 59,10 €
+                  </SelectItem>
+                  <SelectItem value="primeira-autorizacao">Primeira Autorização de Residência - 83,90 €</SelectItem>
+                  <SelectItem value="reagrupamento-familiar">Reagrupamento Familiar - 109,30 €</SelectItem>
+                  <SelectItem value="informacao-consulta">Informação / Consulta - 39,10 €</SelectItem>
+                  <SelectItem value="outros">Outros - 39,10 €</SelectItem>
                 </SelectContent>
               </Select>
+              {formData.tipoServico && (
+                <p className="text-sm text-muted-foreground">
+                  Valor do serviço:{" "}
+                  <span className="font-semibold text-primary">
+                    {formatPrice(getServicePrice(formData.tipoServico))}
+                  </span>
+                </p>
+              )}
             </div>
 
-            {formData.tipoServico === "outros" && (
-              <div className="space-y-2">
-                <Label htmlFor="outrosDetalhes">Descreva o Serviço</Label>
-                <Textarea
-                  id="outrosDetalhes"
-                  value={formData.outrosDetalhes}
-                  onChange={(e) => setFormData({ ...formData, outrosDetalhes: e.target.value })}
-                  placeholder="Descreva o serviço que necessita..."
-                  rows={4}
-                />
-              </div>
-            )}
+            <div className="space-y-2">
+              <Label htmlFor="outrosDetalhes">Detalhes Adicionais (opcional)</Label>
+              <Textarea
+                id="outrosDetalhes"
+                value={formData.outrosDetalhes}
+                onChange={(e) => setFormData({ ...formData, outrosDetalhes: e.target.value })}
+                placeholder="Descreva qualquer informação adicional relevante para o seu atendimento"
+                rows={4}
+              />
+            </div>
 
             <div className="flex justify-between">
               <Button type="button" variant="outline" onClick={handleBack}>
@@ -302,9 +328,9 @@ export function AppointmentForm() {
                   <SelectContent>
                     <SelectItem value="lisboa">Lisboa</SelectItem>
                     <SelectItem value="porto">Porto</SelectItem>
+                    <SelectItem value="faro">Faro</SelectItem>
                     <SelectItem value="coimbra">Coimbra</SelectItem>
                     <SelectItem value="braga">Braga</SelectItem>
-                    <SelectItem value="faro">Faro</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -322,10 +348,10 @@ export function AppointmentForm() {
                   <SelectValue placeholder="Selecione o centro" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="lisboa-centro">Lisboa Centro</SelectItem>
-                  <SelectItem value="lisboa-norte">Lisboa Norte</SelectItem>
-                  <SelectItem value="porto-centro">Porto Centro</SelectItem>
-                  <SelectItem value="coimbra-centro">Coimbra Centro</SelectItem>
+                  <SelectItem value="lisboa-central">Lisboa - Centro de Atendimento Central</SelectItem>
+                  <SelectItem value="lisboa-odivelas">Lisboa - Odivelas</SelectItem>
+                  <SelectItem value="porto-central">Porto - Centro de Atendimento</SelectItem>
+                  <SelectItem value="faro">Faro - Centro de Atendimento</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -333,7 +359,7 @@ export function AppointmentForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>
-                  Data Desejada <span className="text-destructive">*</span>
+                  Data Pretendida <span className="text-destructive">*</span>
                 </Label>
                 <Popover>
                   <PopoverTrigger asChild>
@@ -342,31 +368,25 @@ export function AppointmentForm() {
                       className={cn("w-full justify-start text-left font-normal", !date && "text-muted-foreground")}
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
-                      {date ? format(date, "PPP", { locale: ptBR }) : "Selecione a data"}
+                      {date ? format(date, "PPP", { locale: pt }) : "Escolha uma data"}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={date}
-                      onSelect={setDate}
-                      initialFocus
-                      disabled={(date) => date < new Date()}
-                    />
+                  <PopoverContent className="w-auto p-0">
+                    <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
                   </PopoverContent>
                 </Popover>
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="horaDesejada">
-                  Hora Desejada <span className="text-destructive">*</span>
+                  Horário Pretendido <span className="text-destructive">*</span>
                 </Label>
                 <Select
                   value={formData.horaDesejada}
                   onValueChange={(value) => setFormData({ ...formData, horaDesejada: value })}
                 >
                   <SelectTrigger id="horaDesejada">
-                    <SelectValue placeholder="Selecione a hora" />
+                    <SelectValue placeholder="Selecione o horário" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="09:00">09:00</SelectItem>
@@ -375,7 +395,6 @@ export function AppointmentForm() {
                     <SelectItem value="14:00">14:00</SelectItem>
                     <SelectItem value="15:00">15:00</SelectItem>
                     <SelectItem value="16:00">16:00</SelectItem>
-                    <SelectItem value="17:00">17:00</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -490,13 +509,6 @@ export function AppointmentForm() {
               {formData.outrosDocumentos && (
                 <p className="text-sm text-muted-foreground">Ficheiro selecionado: {formData.outrosDocumentos.name}</p>
               )}
-            </div>
-
-            <div className="bg-muted/50 p-4 rounded-lg">
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                <strong>Nota:</strong> Certifique-se de que todos os documentos estão legíveis e dentro do tamanho
-                máximo permitido. Os documentos serão revisados antes da confirmação do agendamento.
-              </p>
             </div>
 
             <div className="flex justify-between">
