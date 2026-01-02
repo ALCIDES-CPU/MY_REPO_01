@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 
-const WHOP_API_KEY = "apik_XYhJuzI4PRtQc_C4057542_C_f9caa70d40b2c3085ddf0a7ff12a5c152093b58bef80123e3baced336a5329"
+const WHOP_API_KEY = "apik_ZWY6gNfR7Wai2_C4057542_C_43c806636cacc5b0945a04236eea3991c4d7c645fb5f856a5be8e6463c07af"
 const WHOP_API_URL = "https://api.whop.com/api/v1"
 
 export async function POST(request: Request) {
