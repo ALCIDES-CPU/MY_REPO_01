@@ -1,8 +1,12 @@
+"use client"
+
+import { Suspense } from "react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { PaymentForm } from "@/components/payment-form"
+import { Loader2 } from "lucide-react"
 
-export default function PagamentoPage() {
+function PaymentContent() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
@@ -16,11 +20,23 @@ export default function PagamentoPage() {
             </p>
           </div>
 
-          <PaymentForm />
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center py-12">
+                <Loader2 className="w-8 h-8 animate-spin text-primary" />
+              </div>
+            }
+          >
+            <PaymentForm />
+          </Suspense>
         </div>
       </main>
 
       <Footer />
     </div>
   )
+}
+
+export default function PagamentoPage() {
+  return <PaymentContent />
 }
