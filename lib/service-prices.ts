@@ -1,16 +1,16 @@
 export const SERVICE_PRICES = {
-  "agendamento-geral": 39.1,
+  "agendamento-geral": 59.1,
   "renovacao-autorizacao": 59.1,
-  "primeira-autorizacao": 83.9,
-  "reagrupamento-familiar": 109.3,
-  "informacao-consulta": 39.1,
-  outros: 39.1,
+  "primeira-autorizacao": 59.1,
+  "reagrupamento-familiar": 59.1,
+  "informacao-consulta": 59.1,
+  outros: 59.1,
 } as const
 
 export type ServiceType = keyof typeof SERVICE_PRICES
 
 export function getServicePrice(serviceType: ServiceType): number {
-  return SERVICE_PRICES[serviceType] || 39.1
+  return SERVICE_PRICES[serviceType]
 }
 
 export function formatPrice(price: number): string {

@@ -4,13 +4,12 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { CheckCircle, Loader2, CreditCard, Shield, Euro, AlertCircle } from "lucide-react"
+import { Loader2, CreditCard, Shield, Euro, AlertCircle } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { getServicePrice, formatPrice, type ServiceType } from "@/lib/service-prices"
 
 export function PaymentForm() {
   const [isProcessing, setIsProcessing] = useState(false)
-  const [paymentSuccess, setPaymentSuccess] = useState(false)
   const [paymentError, setPaymentError] = useState<string | null>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -25,18 +24,43 @@ export function PaymentForm() {
       try {
         const data = JSON.parse(stored)
         setAppointmentData(data)
-        console.log("[v0] Loaded appointment data from sessionStorage:", data)
       } catch (error) {
         console.error("[v0] Error parsing appointment data:", error)
       }
     }
   }, [])
 
+  const openCheckoutPopup = (url: string) => {
+    const width = 600
+    const height = 700
+    const left = window.screen.width / 2 - width / 2
+    const top = window.screen.height / 2 - height / 2
+
+    const popup = window.open(
+      url,
+      "WhopCheckout",
+      `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`,
+    )
+
+    if (!popup) {
+      // Fallback se popup foi bloqueado
+      window.location.href = url
+      return
+    }
+
+    // Verificar quando o popup é fechado
+    const checkPopup = setInterval(() => {
+      if (popup.closed) {
+        clearInterval(checkPopup)
+        // Redirecionar para confirmação após fechar o popup
+        router.push("/confirmacao")
+      }
+    }, 1000)
+  }
+
   const handlePayment = async () => {
     setIsProcessing(true)
     setPaymentError(null)
-
-    console.log("[v0] Starting payment process for service:", serviceType, "amount:", paymentAmount)
 
     try {
       const response = await fetch("/api/process-payment", {
@@ -45,8 +69,6 @@ export function PaymentForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: paymentAmount,
-          currency: "EUR",
           appointmentData: {
             ...appointmentData,
             service: serviceType,
@@ -56,21 +78,11 @@ export function PaymentForm() {
       })
 
       const data = await response.json()
-      console.log("[v0] Payment API response:", data)
 
-      if (response.ok && data.success) {
-        if (data.checkoutUrl) {
-          console.log("[v0] Redirecting to Whop checkout:", data.checkoutUrl)
-          window.location.href = data.checkoutUrl
-        } else {
-          setPaymentSuccess(true)
-          setTimeout(() => {
-            router.push("/confirmacao")
-          }, 2000)
-        }
+      if (response.ok && data.success && data.checkoutUrl) {
+        openCheckoutPopup(data.checkoutUrl)
       } else {
         setPaymentError(data.error || "Erro ao processar o pagamento. Por favor, tente novamente.")
-        console.error("[v0] Payment failed:", data)
       }
     } catch (error) {
       console.error("[v0] Payment error:", error)
@@ -78,23 +90,6 @@ export function PaymentForm() {
     } finally {
       setIsProcessing(false)
     }
-  }
-
-  if (paymentSuccess) {
-    return (
-      <Card>
-        <CardContent className="pt-6">
-          <div className="text-center py-8">
-            <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-              <CheckCircle className="w-10 h-10 text-green-600" />
-            </div>
-            <h2 className="text-2xl font-bold mb-2">Pagamento Confirmado!</h2>
-            <p className="text-muted-foreground mb-4">O seu agendamento foi processado com sucesso.</p>
-            <p className="text-sm text-muted-foreground">A redirecioná-lo para a página de confirmação...</p>
-          </div>
-        </CardContent>
-      </Card>
-    )
   }
 
   return (
