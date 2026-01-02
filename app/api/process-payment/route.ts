@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 
 const WHOP_API_KEY = "apik_ZWY6gNfR7Wai2_C4057542_C_43c806636cacc5b0945a04236eea3991c4d7c645fb5f856a5be8e6463c07af"
 const WHOP_API_URL = "https://api.whop.com/api/v1"
+const WHOP_COMPANY_ID = "biz_C4057542"
 
 export async function POST(request: Request) {
   try {
@@ -22,18 +23,20 @@ export async function POST(request: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        mode: "payment",
         plan: {
-          initial_price: amount,
-          plan_type: "one_time",
+          company_id: WHOP_COMPANY_ID,
           currency: currency.toLowerCase(),
+          initial_price: Math.round(amount * 100), // Convert to cents
+          plan_type: "one_time",
+          release_method: "buy_now",
         },
         metadata: {
           service: appointmentData?.service || "AIMA Appointment",
           appointment_type: appointmentData?.appointmentType || "general",
           timestamp: new Date().toISOString(),
         },
-        success_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/confirmacao`,
-        cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/pagamento`,
+        redirect_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/confirmacao`,
       }),
     })
 
