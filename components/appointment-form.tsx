@@ -16,7 +16,7 @@ import { CalendarIcon, Upload, Loader2 } from "lucide-react"
 import { format } from "date-fns"
 import { pt } from "date-fns/locale"
 import { cn } from "@/lib/utils"
-import { getServicePrice, formatPrice, type ServiceType } from "@/lib/service-prices"
+import type { ServiceType } from "@/lib/service-prices"
 import { useRouter } from "next/navigation"
 
 export function AppointmentForm() {
@@ -97,6 +97,15 @@ export function AppointmentForm() {
   }
 
   const progressPercentage = (step / 4) * 100
+
+  const disableWeekends = (date: Date) => {
+    const day = date.getDay()
+    return day === 0 || day === 6 // 0 = Domingo, 6 = Sábado
+  }
+
+  const validateStep = () => {
+    // Implement validation logic here
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -303,7 +312,7 @@ export function AppointmentForm() {
                   <SelectItem value="haiti">Haiti</SelectItem>
                   <SelectItem value="honduras">Honduras</SelectItem>
                   <SelectItem value="hungria">Hungria</SelectItem>
-                  <SelectItem value="iemen">Iémen</SelectItem>
+                  <SelectItem value="iemen">Iêmen</SelectItem>
                   <SelectItem value="ilhas-marshall">Ilhas Marshall</SelectItem>
                   <SelectItem value="ilhas-salomao">Ilhas Salomão</SelectItem>
                   <SelectItem value="india">Índia</SelectItem>
@@ -448,24 +457,14 @@ export function AppointmentForm() {
                   <SelectValue placeholder="Selecione o serviço" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="agendamento-geral">Agendamento Geral AIMA - 59,10 €</SelectItem>
-                  <SelectItem value="renovacao-autorizacao">
-                    Renovação de Autorização de Residência - 59,10 €
-                  </SelectItem>
-                  <SelectItem value="primeira-autorizacao">Primeira Autorização de Residência - 59,10 €</SelectItem>
-                  <SelectItem value="reagrupamento-familiar">Reagrupamento Familiar - 59,10 €</SelectItem>
-                  <SelectItem value="informacao-consulta">Informação / Consulta - 59,10 €</SelectItem>
-                  <SelectItem value="outros">Outros - 59,10 €</SelectItem>
+                  <SelectItem value="agendamento-geral">Agendamento Geral AIMA</SelectItem>
+                  <SelectItem value="renovacao-autorizacao">Renovação de Autorização de Residência</SelectItem>
+                  <SelectItem value="primeira-autorizacao">Primeira Autorização de Residência</SelectItem>
+                  <SelectItem value="reagrupamento-familiar">Reagrupamento Familiar</SelectItem>
+                  <SelectItem value="informacao-consulta">Informação / Consulta</SelectItem>
+                  <SelectItem value="outros">Outros</SelectItem>
                 </SelectContent>
               </Select>
-              {formData.tipoServico && (
-                <p className="text-sm text-muted-foreground">
-                  Valor do serviço:{" "}
-                  <span className="font-semibold text-primary">
-                    {formatPrice(getServicePrice(formData.tipoServico))}
-                  </span>
-                </p>
-              )}
             </div>
 
             <div className="space-y-2">
@@ -583,7 +582,13 @@ export function AppointmentForm() {
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0">
-                    <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
+                    <Calendar
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                      disabled={disableWeekends}
+                      initialFocus
+                    />
                   </PopoverContent>
                 </Popover>
               </div>
