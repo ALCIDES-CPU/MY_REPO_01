@@ -100,7 +100,9 @@ export function AppointmentForm() {
 
   const disableWeekends = (date: Date) => {
     const day = date.getDay()
-    return day === 0 || day === 6 // 0 = Domingo, 6 = Sábado
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    return day === 0 || day === 6 || date < today
   }
 
   const validateStep = () => {
@@ -658,25 +660,6 @@ export function AppointmentForm() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="comprovanteResidencia">Comprovante de Residência</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="comprovanteResidencia"
-                  type="file"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange("comprovanteResidencia", e.target.files?.[0] || null)}
-                  className="cursor-pointer"
-                />
-                <Upload className="h-5 w-5 text-muted-foreground" />
-              </div>
-              {formData.comprovanteResidencia && (
-                <p className="text-sm text-muted-foreground">
-                  Ficheiro selecionado: {formData.comprovanteResidencia.name}
-                </p>
-              )}
-            </div>
-
-            <div className="space-y-2">
               <Label htmlFor="vistoAutorizacao">Visto/Autorização Anterior</Label>
               <div className="flex items-center gap-2">
                 <Input
@@ -690,23 +673,6 @@ export function AppointmentForm() {
               </div>
               {formData.vistoAutorizacao && (
                 <p className="text-sm text-muted-foreground">Ficheiro selecionado: {formData.vistoAutorizacao.name}</p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="nifNiss">NIF/NISS (quando aplicável)</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="nifNiss"
-                  type="file"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange("nifNiss", e.target.files?.[0] || null)}
-                  className="cursor-pointer"
-                />
-                <Upload className="h-5 w-5 text-muted-foreground" />
-              </div>
-              {formData.nifNiss && (
-                <p className="text-sm text-muted-foreground">Ficheiro selecionado: {formData.nifNiss.name}</p>
               )}
             </div>
 
