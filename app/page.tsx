@@ -15,7 +15,7 @@ export default function HomePage() {
         {/* Hero Section */}
         <section className="relative h-[500px] md:h-[600px]">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/OTU-iehtVyjAnKgSClZO24oqMPViToZfmL.jpg"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AIMA%20BANNER%20-qPYAKt1iWo0GKVgvrTHYNOzwic2Pv9.jpg"
             alt="Banner AIMA - Agência para a Integração, Migrações e Asilo"
             fill
             className="object-cover"
@@ -89,7 +89,7 @@ export default function HomePage() {
         {/* Benefits Section */}
         <section className="py-16 md:py-20 bg-muted/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center mb-12">Vantagens da Plataforma</h2>
+            <h2 className="text-3xl font-bold text-center mb-12">{"Plataforma oficial da AIMA destinada à agilização do processo de legalização."}       </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="flex gap-4">
