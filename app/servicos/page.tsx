@@ -11,44 +11,39 @@ const services = [
     title: "Agendamento Geral AIMA",
     description: "Marcação de atendimento para serviços gerais da AIMA",
     duration: "30-45 minutos",
-    cost: "59,10 €", // Atualizado preço para 59,10 €
-    documents: ["Documento de identificação", "Comprovante de residência"],
+    cost: "59,10 €",
+    documents: ["Documento de identificação"],
   },
   {
     icon: FileText,
     title: "Renovação de Autorização de Residência",
     description: "Renovação de autorização de residência temporária ou permanente",
     duration: "45-60 minutos",
-    cost: "59,10 €", // Atualizado preço para 59,10 €
-    documents: ["Passaporte/CC", "Autorização anterior", "Comprovante de residência", "NIF/NISS"],
+    cost: "59,10 €",
+    documents: ["Passaporte/CC", "Autorização anterior"],
   },
   {
     icon: Home,
     title: "Primeira Autorização de Residência",
     description: "Pedido de primeira autorização de residência em Portugal",
     duration: "60-90 minutos",
-    cost: "59,10 €", // Atualizado preço para 59,10 €
-    documents: ["Passaporte", "Visto", "Contrato de trabalho/estudos", "Seguro de saúde", "Comprovante de alojamento"],
+    cost: "59,10 €",
+    documents: ["Passaporte", "Visto", "Contrato de trabalho/estudos", "Seguro de saúde"],
   },
   {
     icon: Users,
     title: "Reagrupamento Familiar",
     description: "Pedido de reagrupamento familiar para residentes em Portugal",
     duration: "45-60 minutos",
-    cost: "59,10 €", // Atualizado preço para 59,10 €
-    documents: [
-      "Documentos de identificação",
-      "Autorização do requerente",
-      "Prova de parentesco",
-      "Comprovante de rendimentos",
-    ],
+    cost: "59,10 €",
+    documents: ["Documentos de identificação", "Autorização do requerente", "Prova de parentesco"],
   },
   {
     icon: Info,
     title: "Informação / Consulta",
     description: "Esclarecimento de dúvidas sobre processos e serviços AIMA",
     duration: "15-30 minutos",
-    cost: "59,10 €", // Atualizado preço para 59,10 €
+    cost: "59,10 €",
     documents: ["Documento de identificação"],
   },
 ]
@@ -117,7 +112,7 @@ export default function ServicosPage() {
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   Escolha o serviço que necessita e complete o agendamento online de forma rápida e segura.
                 </p>
-                <Button asChild size="lg">
+                <Button asChild size="lg" className="rounded-full">
                   <Link href="/agendar">Agendar Atendimento</Link>
                 </Button>
               </CardContent>

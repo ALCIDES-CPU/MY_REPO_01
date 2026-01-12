@@ -25,10 +25,22 @@ export function PaymentForm() {
         const data = JSON.parse(stored)
         setAppointmentData(data)
       } catch (error) {
-        console.error("[v0] Error parsing appointment data:", error)
+        console.error("Error parsing appointment data:", error)
       }
     }
   }, [])
+
+  const getServiceName = (type: ServiceType): string => {
+    const names: Record<ServiceType, string> = {
+      "agendamento-geral": "Agendamento Geral AIMA",
+      "renovacao-autorizacao": "Renovação de Autorização de Residência",
+      "primeira-autorizacao": "Primeira Autorização de Residência",
+      "reagrupamento-familiar": "Reagrupamento Familiar",
+      "informacao-consulta": "Informação / Consulta",
+      outros: "Outros Serviços",
+    }
+    return names[type] || "Serviço AIMA"
+  }
 
   const openCheckoutPopup = (url: string) => {
     const width = 600
@@ -85,7 +97,7 @@ export function PaymentForm() {
         setPaymentError(data.error || "Erro ao processar o pagamento. Por favor, tente novamente.")
       }
     } catch (error) {
-      console.error("[v0] Payment error:", error)
+      console.error("Payment error:", error)
       setPaymentError("Erro de conexão. Por favor, verifique a sua internet e tente novamente.")
     } finally {
       setIsProcessing(false)
@@ -106,14 +118,7 @@ export function PaymentForm() {
           <div className="bg-muted/50 p-4 rounded-lg">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-muted-foreground">Serviço:</span>
-              <span className="font-medium">
-                {serviceType === "agendamento-geral" && "Agendamento Geral AIMA"}
-                {serviceType === "renovacao-autorizacao" && "Renovação de Autorização de Residência"}
-                {serviceType === "primeira-autorizacao" && "Primeira Autorização de Residência"}
-                {serviceType === "reagrupamento-familiar" && "Reagrupamento Familiar"}
-                {serviceType === "informacao-consulta" && "Informação / Consulta"}
-                {serviceType === "outros" && "Outros Serviços"}
-              </span>
+              <span className="font-medium">{getServiceName(serviceType)}</span>
             </div>
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-muted-foreground">Taxa de processamento:</span>
@@ -181,7 +186,7 @@ export function PaymentForm() {
               </div>
             </div>
 
-            <Button onClick={handlePayment} disabled={isProcessing} className="w-full" size="lg">
+            <Button onClick={handlePayment} disabled={isProcessing} className="w-full rounded-full" size="lg">
               {isProcessing ? (
                 <>
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />A processar pagamento...

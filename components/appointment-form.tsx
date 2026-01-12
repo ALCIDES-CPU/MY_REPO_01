@@ -24,6 +24,7 @@ export function AppointmentForm() {
   const [step, setStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [date, setDate] = useState<Date>()
+  const [errors, setErrors] = useState<Record<string, string>>({})
 
   const [formData, setFormData] = useState({
     // Dados Pessoais
@@ -42,14 +43,11 @@ export function AppointmentForm() {
     // Localização e Horário
     pais: "",
     centroAtendimento: "",
-    centroAIMA: "",
     horaDesejada: "",
 
     // Documentos (file names/references)
     documentoIdentificacao: null as File | null,
-    comprovanteResidencia: null as File | null,
     vistoAutorizacao: null as File | null,
-    nifNiss: null as File | null,
     outrosDocumentos: null as File | null,
   })
 
@@ -57,8 +55,44 @@ export function AppointmentForm() {
     setFormData((prev) => ({ ...prev, [field]: file }))
   }
 
+  const validateStep = (): boolean => {
+    const newErrors: Record<string, string> = {}
+
+    if (step === 1) {
+      if (!formData.nomeCompleto.trim()) newErrors.nomeCompleto = "Nome completo é obrigatório"
+      if (!formData.dataNascimento) newErrors.dataNascimento = "Data de nascimento é obrigatória"
+      if (!formData.tipoDocumento) newErrors.tipoDocumento = "Tipo de documento é obrigatório"
+      if (!formData.numeroDocumento.trim()) newErrors.numeroDocumento = "Número do documento é obrigatório"
+      if (!formData.email.trim()) newErrors.email = "E-mail é obrigatório"
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "E-mail inválido"
+      if (!formData.telefone.trim()) newErrors.telefone = "Telemóvel é obrigatório"
+      if (!formData.paisNacionalidade) newErrors.paisNacionalidade = "País de nacionalidade é obrigatório"
+    }
+
+    if (step === 2) {
+      if (!formData.tipoServico) newErrors.tipoServico = "Tipo de serviço é obrigatório"
+    }
+
+    if (step === 3) {
+      if (!formData.pais) newErrors.pais = "País é obrigatório"
+      if (!formData.centroAtendimento) newErrors.centroAtendimento = "Centro de atendimento é obrigatório"
+      if (!date) newErrors.date = "Data é obrigatória"
+      if (!formData.horaDesejada) newErrors.horaDesejada = "Horário é obrigatório"
+    }
+
+    if (step === 4) {
+      if (!formData.documentoIdentificacao)
+        newErrors.documentoIdentificacao = "Documento de identificação é obrigatório"
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
   const handleNext = () => {
-    setStep(step + 1)
+    if (validateStep()) {
+      setStep(step + 1)
+    }
   }
 
   const handleBack = () => {
@@ -67,9 +101,12 @@ export function AppointmentForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
 
-    console.log("[v0] Form submitted with data:", formData)
+    if (!validateStep()) {
+      return
+    }
+
+    setIsSubmitting(true)
 
     try {
       // Store appointment data in sessionStorage
@@ -80,7 +117,6 @@ export function AppointmentForm() {
       }
 
       sessionStorage.setItem("appointmentData", JSON.stringify(appointmentData))
-      console.log("[v0] Appointment data stored in sessionStorage")
 
       // Simulate processing delay
       await new Promise((resolve) => setTimeout(resolve, 1000))
@@ -89,7 +125,7 @@ export function AppointmentForm() {
       const serviceType = formData.tipoServico || "agendamento-geral"
       router.push(`/pagamento?service=${serviceType}`)
     } catch (error) {
-      console.error("[v0] Error submitting form:", error)
+      console.error("Error submitting form:", error)
       alert("Erro ao submeter o formulário. Por favor, tente novamente.")
     } finally {
       setIsSubmitting(false)
@@ -103,10 +139,6 @@ export function AppointmentForm() {
     const today = new Date()
     today.setHours(0, 0, 0, 0)
     return day === 0 || day === 6 || date < today
-  }
-
-  const validateStep = () => {
-    // Implement validation logic here
   }
 
   return (
@@ -135,11 +167,12 @@ export function AppointmentForm() {
                 </Label>
                 <Input
                   id="nomeCompleto"
-                  required
                   value={formData.nomeCompleto}
                   onChange={(e) => setFormData({ ...formData, nomeCompleto: e.target.value })}
                   placeholder="Seu nome completo"
+                  className={errors.nomeCompleto ? "border-destructive" : ""}
                 />
+                {errors.nomeCompleto && <p className="text-sm text-destructive">{errors.nomeCompleto}</p>}
               </div>
 
               <div className="space-y-2">
@@ -149,10 +182,11 @@ export function AppointmentForm() {
                 <Input
                   id="dataNascimento"
                   type="date"
-                  required
                   value={formData.dataNascimento}
                   onChange={(e) => setFormData({ ...formData, dataNascimento: e.target.value })}
+                  className={errors.dataNascimento ? "border-destructive" : ""}
                 />
+                {errors.dataNascimento && <p className="text-sm text-destructive">{errors.dataNascimento}</p>}
               </div>
             </div>
 
@@ -165,7 +199,7 @@ export function AppointmentForm() {
                   value={formData.tipoDocumento}
                   onValueChange={(value) => setFormData({ ...formData, tipoDocumento: value })}
                 >
-                  <SelectTrigger id="tipoDocumento">
+                  <SelectTrigger id="tipoDocumento" className={errors.tipoDocumento ? "border-destructive" : ""}>
                     <SelectValue placeholder="Selecione o tipo" />
                   </SelectTrigger>
                   <SelectContent>
@@ -174,6 +208,7 @@ export function AppointmentForm() {
                     <SelectItem value="outro">Outro</SelectItem>
                   </SelectContent>
                 </Select>
+                {errors.tipoDocumento && <p className="text-sm text-destructive">{errors.tipoDocumento}</p>}
               </div>
 
               <div className="space-y-2">
@@ -182,11 +217,12 @@ export function AppointmentForm() {
                 </Label>
                 <Input
                   id="numeroDocumento"
-                  required
                   value={formData.numeroDocumento}
                   onChange={(e) => setFormData({ ...formData, numeroDocumento: e.target.value })}
                   placeholder="Número do documento"
+                  className={errors.numeroDocumento ? "border-destructive" : ""}
                 />
+                {errors.numeroDocumento && <p className="text-sm text-destructive">{errors.numeroDocumento}</p>}
               </div>
             </div>
 
@@ -198,11 +234,12 @@ export function AppointmentForm() {
                 <Input
                   id="email"
                   type="email"
-                  required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="seu@email.com"
+                  className={errors.email ? "border-destructive" : ""}
                 />
+                {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
               </div>
 
               <div className="space-y-2">
@@ -212,11 +249,12 @@ export function AppointmentForm() {
                 <Input
                   id="telefone"
                   type="tel"
-                  required
                   value={formData.telefone}
                   onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
                   placeholder="+351 912 345 678"
+                  className={errors.telefone ? "border-destructive" : ""}
                 />
+                {errors.telefone && <p className="text-sm text-destructive">{errors.telefone}</p>}
               </div>
             </div>
 
@@ -228,7 +266,7 @@ export function AppointmentForm() {
                 value={formData.paisNacionalidade}
                 onValueChange={(value) => setFormData({ ...formData, paisNacionalidade: value })}
               >
-                <SelectTrigger id="paisNacionalidade">
+                <SelectTrigger id="paisNacionalidade" className={errors.paisNacionalidade ? "border-destructive" : ""}>
                   <SelectValue placeholder="Selecione a nacionalidade" />
                 </SelectTrigger>
                 <SelectContent className="max-h-[300px]">
@@ -428,10 +466,11 @@ export function AppointmentForm() {
                   <SelectItem value="zimbabwe">Zimbabué</SelectItem>
                 </SelectContent>
               </Select>
+              {errors.paisNacionalidade && <p className="text-sm text-destructive">{errors.paisNacionalidade}</p>}
             </div>
 
             <div className="flex justify-end">
-              <Button type="button" onClick={handleNext}>
+              <Button type="button" onClick={handleNext} className="rounded-full">
                 Próximo
               </Button>
             </div>
@@ -455,7 +494,7 @@ export function AppointmentForm() {
                 value={formData.tipoServico}
                 onValueChange={(value) => setFormData({ ...formData, tipoServico: value as ServiceType })}
               >
-                <SelectTrigger id="tipoServico">
+                <SelectTrigger id="tipoServico" className={errors.tipoServico ? "border-destructive" : ""}>
                   <SelectValue placeholder="Selecione o serviço" />
                 </SelectTrigger>
                 <SelectContent>
@@ -467,6 +506,7 @@ export function AppointmentForm() {
                   <SelectItem value="outros">Outros</SelectItem>
                 </SelectContent>
               </Select>
+              {errors.tipoServico && <p className="text-sm text-destructive">{errors.tipoServico}</p>}
             </div>
 
             <div className="space-y-2">
@@ -481,10 +521,10 @@ export function AppointmentForm() {
             </div>
 
             <div className="flex justify-between">
-              <Button type="button" variant="outline" onClick={handleBack}>
+              <Button type="button" variant="outline" onClick={handleBack} className="rounded-full bg-transparent">
                 Voltar
               </Button>
-              <Button type="button" onClick={handleNext}>
+              <Button type="button" onClick={handleNext} className="rounded-full">
                 Próximo
               </Button>
             </div>
@@ -505,13 +545,14 @@ export function AppointmentForm() {
                 País <span className="text-destructive">*</span>
               </Label>
               <Select value={formData.pais} onValueChange={(value) => setFormData({ ...formData, pais: value })}>
-                <SelectTrigger id="pais">
+                <SelectTrigger id="pais" className={errors.pais ? "border-destructive" : ""}>
                   <SelectValue placeholder="Selecione o país" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="portugal">Portugal</SelectItem>
                 </SelectContent>
               </Select>
+              {errors.pais && <p className="text-sm text-destructive">{errors.pais}</p>}
             </div>
 
             <div className="space-y-2">
@@ -522,7 +563,7 @@ export function AppointmentForm() {
                 value={formData.centroAtendimento}
                 onValueChange={(value) => setFormData({ ...formData, centroAtendimento: value })}
               >
-                <SelectTrigger id="centroAtendimento">
+                <SelectTrigger id="centroAtendimento" className={errors.centroAtendimento ? "border-destructive" : ""}>
                   <SelectValue placeholder="Selecione o centro" />
                 </SelectTrigger>
                 <SelectContent className="max-h-[300px]">
@@ -566,6 +607,7 @@ export function AppointmentForm() {
                   </SelectItem>
                 </SelectContent>
               </Select>
+              {errors.centroAtendimento && <p className="text-sm text-destructive">{errors.centroAtendimento}</p>}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -577,7 +619,11 @@ export function AppointmentForm() {
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
-                      className={cn("w-full justify-start text-left font-normal", !date && "text-muted-foreground")}
+                      className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !date && "text-muted-foreground",
+                        errors.date && "border-destructive",
+                      )}
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
                       {date ? format(date, "PPP", { locale: pt }) : "Escolha uma data"}
@@ -593,6 +639,7 @@ export function AppointmentForm() {
                     />
                   </PopoverContent>
                 </Popover>
+                {errors.date && <p className="text-sm text-destructive">{errors.date}</p>}
               </div>
 
               <div className="space-y-2">
@@ -603,7 +650,7 @@ export function AppointmentForm() {
                   value={formData.horaDesejada}
                   onValueChange={(value) => setFormData({ ...formData, horaDesejada: value })}
                 >
-                  <SelectTrigger id="horaDesejada">
+                  <SelectTrigger id="horaDesejada" className={errors.horaDesejada ? "border-destructive" : ""}>
                     <SelectValue placeholder="Selecione o horário" />
                   </SelectTrigger>
                   <SelectContent>
@@ -615,14 +662,15 @@ export function AppointmentForm() {
                     <SelectItem value="16:00">16:00</SelectItem>
                   </SelectContent>
                 </Select>
+                {errors.horaDesejada && <p className="text-sm text-destructive">{errors.horaDesejada}</p>}
               </div>
             </div>
 
             <div className="flex justify-between">
-              <Button type="button" variant="outline" onClick={handleBack}>
+              <Button type="button" variant="outline" onClick={handleBack} className="rounded-full bg-transparent">
                 Voltar
               </Button>
-              <Button type="button" onClick={handleNext}>
+              <Button type="button" onClick={handleNext} className="rounded-full">
                 Próximo
               </Button>
             </div>
@@ -648,7 +696,7 @@ export function AppointmentForm() {
                   type="file"
                   accept=".pdf,.jpg,.jpeg,.png"
                   onChange={(e) => handleFileChange("documentoIdentificacao", e.target.files?.[0] || null)}
-                  className="cursor-pointer"
+                  className={cn("cursor-pointer", errors.documentoIdentificacao && "border-destructive")}
                 />
                 <Upload className="h-5 w-5 text-muted-foreground" />
               </div>
@@ -657,10 +705,13 @@ export function AppointmentForm() {
                   Ficheiro selecionado: {formData.documentoIdentificacao.name}
                 </p>
               )}
+              {errors.documentoIdentificacao && (
+                <p className="text-sm text-destructive">{errors.documentoIdentificacao}</p>
+              )}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="vistoAutorizacao">Visto/Autorização Anterior</Label>
+              <Label htmlFor="vistoAutorizacao">Visto/Autorização Anterior (opcional)</Label>
               <div className="flex items-center gap-2">
                 <Input
                   id="vistoAutorizacao"
@@ -677,7 +728,7 @@ export function AppointmentForm() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="outrosDocumentos">Outros Documentos</Label>
+              <Label htmlFor="outrosDocumentos">Outros Documentos (opcional)</Label>
               <div className="flex items-center gap-2">
                 <Input
                   id="outrosDocumentos"
@@ -704,10 +755,10 @@ export function AppointmentForm() {
             </div>
 
             <div className="flex justify-between">
-              <Button type="button" variant="outline" onClick={handleBack}>
+              <Button type="button" variant="outline" onClick={handleBack} className="rounded-full bg-transparent">
                 Voltar
               </Button>
-              <Button type="submit" disabled={isSubmitting}>
+              <Button type="submit" disabled={isSubmitting} className="rounded-full">
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />A processar...
