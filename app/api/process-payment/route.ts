@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 
-const WHOP_CHECKOUT_URL = "https://whop.com/checkout/plan_LwcSu9yXm6YGL"
+const STRIPE_CHECKOUT_URL = "https://buy.stripe.com/fZu6oJevcg7aey8b3AenS01"
 
 export async function POST(request: Request) {
   try {
@@ -9,7 +9,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      checkoutUrl: WHOP_CHECKOUT_URL,
+      checkoutUrl: STRIPE_CHECKOUT_URL,
       message: "Link de pagamento gerado com sucesso",
     })
   } catch (error) {
