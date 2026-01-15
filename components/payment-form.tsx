@@ -152,7 +152,7 @@ export function PaymentForm() {
           <Alert>
             <Shield className="h-4 w-4" />
             <AlertDescription>
-              Pagamento processado de forma segura através da plataforma Stripe. Os seus dados estão protegidos com
+              Pagamento processado de forma segura através da plataforma Whop. Os seus dados estão protegidos com
               encriptação de ponta a ponta.
             </AlertDescription>
           </Alert>
