@@ -99,7 +99,7 @@ export default function HomePage() {
                 <div>
                   <h3 className="font-semibold mb-2">Rápido e Conveniente</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Agende o seu atendimento a qualquer hora, sem filas
+                    Agende o seu atendimento a qualquer hora, sem filas.
                   </p>
                 </div>
               </div>
