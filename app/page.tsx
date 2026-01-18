@@ -15,7 +15,7 @@ export default function HomePage() {
         {/* Hero Section */}
         <section className="relative h-[500px] md:h-[600px]">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/banner%20aima%20%281%29-lYGxhyhBkUtzrY6Uk8jSyAus9Zy1U6.png"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/BANNER%20SITE1-O4YSkNoBBHBzvudDK7GIJ0TQaoKXSW.png"
             alt="Banner AIMA - Agência para a Integração, Migrações e Asilo"
             fill
             className="object-cover"
@@ -23,7 +23,7 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 flex items-center justify-center">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h1 className="text-4xl font-bold mb-6 text-balance text-background md:text-7xl">
+              <h1 className="text-4xl font-bold mb-6 text-balance md:text-7xl text-primary">
                 Agendamento de Serviços AIMA
               </h1>
               <p className="text-lg md:text-2xl text-white/90 mb-8 leading-relaxed text-pretty max-w-3xl mx-auto">
