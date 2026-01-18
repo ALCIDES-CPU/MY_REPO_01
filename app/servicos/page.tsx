@@ -11,7 +11,7 @@ const services = [
     title: "Agendamento Geral AIMA",
     description: "Marcação de atendimento para serviços gerais da AIMA",
     duration: "30-45 minutos",
-    cost: "59.1 €",
+    cost: "83.90 €",
     documents: ["Documento de identificação"],
   },
   {
@@ -19,7 +19,7 @@ const services = [
     title: "Renovação de Autorização de Residência",
     description: "Renovação de autorização de residência temporária ou permanente",
     duration: "45-60 minutos",
-    cost: "59.1 €",
+    cost: "83.90 €",
     documents: ["Passaporte/CC", "Autorização anterior"],
   },
   {
@@ -27,7 +27,7 @@ const services = [
     title: "Primeira Autorização de Residência",
     description: "Pedido de primeira autorização de residência em Portugal",
     duration: "60-90 minutos",
-    cost: "59.1 €",
+    cost: "83.90 €",
     documents: ["Passaporte", "Visto", "Contrato de trabalho/estudos", "Seguro de saúde"],
   },
   {
@@ -35,7 +35,7 @@ const services = [
     title: "Reagrupamento Familiar",
     description: "Pedido de reagrupamento familiar para residentes em Portugal",
     duration: "45-60 minutos",
-    cost: "59.1 €",
+    cost: "83.90 €",
     documents: ["Documentos de identificação", "Autorização do requerente", "Prova de parentesco"],
   },
   {
@@ -43,7 +43,7 @@ const services = [
     title: "Informação / Consulta",
     description: "Esclarecimento de dúvidas sobre processos e serviços AIMA",
     duration: "15-30 minutos",
-    cost: "59.1 €",
+    cost: "83.90 €",
     documents: ["Documento de identificação"],
   },
 ]

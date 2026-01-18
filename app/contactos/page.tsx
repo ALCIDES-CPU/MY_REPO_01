@@ -7,17 +7,17 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Linha de Apoio",
-    details: ["+351 808 202 653", "Chamada para rede fixa nacional"],
+    details: ["+351 808 202 663", "Chamada para rede fixa nacional"],
   },
   {
     icon: Mail,
     title: "E-mail",
-    details: ["info@aima.gov.pt", "Resposta em 48 horas úteis"],
+    details: ["info@sefaima.com", "Resposta em 48 horas úteis"],
   },
   {
     icon: Globe,
     title: "Website Oficial",
-    details: ["www.aima.gov.pt", "Informações e recursos oficiais"],
+    details: ["www.sefaima.com", "Informações e recursos oficiais"],
   },
   {
     icon: Clock,
