@@ -15,7 +15,7 @@ export default function HomePage() {
         {/* Hero Section */}
         <section className="relative h-[500px] md:h-[600px]">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/BANNER%20SITE1-O4YSkNoBBHBzvudDK7GIJ0TQaoKXSW.png"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/BANNER%20SITE1-klACJ8VYfFziDDhnDTarVhbWYQccnO.png"
             alt="Banner AIMA - Agência para a Integração, Migrações e Asilo"
             fill
             className="object-cover"
