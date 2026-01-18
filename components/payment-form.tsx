@@ -152,7 +152,7 @@ export function PaymentForm() {
           <Alert>
             <Shield className="h-4 w-4" />
             <AlertDescription>
-              Pagamento processado de forma segura através da plataforma Whop. Os seus dados estão protegidos com
+              Pagamento processado de forma segura através da plataforma Stripe. Os seus dados estão protegidos com
               encriptação de ponta a ponta.
             </AlertDescription>
           </Alert>
@@ -177,7 +177,7 @@ export function PaymentForm() {
               <div className="flex items-start gap-3">
                 <Shield className="w-5 h-5 text-primary mt-0.5" />
                 <div className="flex-1">
-                  <h4 className="font-semibold text-sm mb-1">Pagamento Seguro via whop</h4>
+                  <h4 className="font-semibold text-sm mb-1">Pagamento Seguro via Stripe</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     A transação será processada de forma segura. Após a confirmação, receberá um e-mail com os detalhes
                     do seu agendamento, caso nao receber o email em 24h, enviar email para info@sefaima.com.
