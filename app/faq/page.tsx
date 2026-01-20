@@ -19,7 +19,7 @@ const faqs = [
   {
     question: "Que documentos preciso de apresentar?",
     answer:
-      "Os documentos necessários variam conforme o tipo de serviço. Geralmente inclui documento de identificação (passaporte ou cartão de cidadão), comprovante de residência, e documentos específicos ao serviço solicitado (visto, autorização anterior, NIF/NISS, etc.). Consulte a página de Serviços para detalhes específicos.",
+      "Os documentos necessários variam conforme o tipo de serviço. Geralmente inclui documento de identificação (passaporte ou cartão de cidadão), comprovante de residência (caso tiver), e documentos específicos ao serviço solicitado (visto, autorização anterior, NIF/NISS, etc.). Consulte a página de Serviços para detalhes específicos.",
   },
   {
     question: "Posso cancelar ou reagendar o meu atendimento?",
@@ -59,7 +59,7 @@ const faqs = [
   {
     question: "O pagamento é reembolsável?",
     answer:
-      "Pagamentos são reembolsáveis apenas em caso de cancelamento com mais de 48 horas de antecedência ou se o serviço não puder ser prestado por motivos imputáveis à AIMA. Contacte o suporte para solicitar reembolso.",
+      "Pagamentos são reembolsáveis apenas em caso de cancelamento com mais de 48 horas de antecedência ou se o serviço não puder ser prestado por motivos imputáveis à AIMA. Contacte o suporte atraves do email (info@sefaima.com) para solicitar reembolso.",
   },
   {
     question: "Preciso de levar os documentos originais?",
