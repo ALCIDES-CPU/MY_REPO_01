@@ -40,8 +40,8 @@ const services = [
   },
   {
     icon: Info,
-    title: "Informação / Consulta",
-    description: "Esclarecimento de dúvidas sobre processos e serviços AIMA",
+    title: "Informação / Consulta / CPLP",
+    description: "Esclarecimento de dúvidas sobre processos e serviços AIMA e Emissão da CPLP",
     duration: "15-30 minutos",
     cost: "59.10 €",
     documents: ["Documento de identificação"],
