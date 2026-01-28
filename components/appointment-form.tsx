@@ -62,8 +62,22 @@ export function AppointmentForm() {
   }
 
   const validateStep = (): boolean => {
-    // Nenhum campo é obrigatório - validação removida
-    return true
+    const newErrors: Record<string, string> = {}
+
+    // Apenas o Passo 1 tem campos obrigatórios
+    if (step === 1) {
+      if (!formData.nomeCompleto.trim()) newErrors.nomeCompleto = "Nome completo é obrigatório"
+      if (!formData.dataNascimento) newErrors.dataNascimento = "Data de nascimento é obrigatória"
+      if (!formData.tipoDocumento) newErrors.tipoDocumento = "Tipo de documento é obrigatório"
+      if (!formData.numeroDocumento.trim()) newErrors.numeroDocumento = "Número do documento é obrigatório"
+      if (!formData.email.trim()) newErrors.email = "E-mail é obrigatório"
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "E-mail inválido"
+      if (!formData.telefone.trim()) newErrors.telefone = "Telemóvel é obrigatório"
+      if (!formData.paisNacionalidade) newErrors.paisNacionalidade = "País de nacionalidade é obrigatório"
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
   }
 
   const handleNext = () => {
@@ -147,7 +161,7 @@ export function AppointmentForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="nomeCompleto">
-                  Nome Completo 
+                  Nome Completo <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="nomeCompleto"
@@ -161,7 +175,7 @@ export function AppointmentForm() {
 
               <div className="space-y-2">
                 <Label htmlFor="dataNascimento">
-                  Data de Nascimento 
+                  Data de Nascimento <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="dataNascimento"
