@@ -46,7 +46,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
-            <Image src="/logo-aima.png" alt="AIMA Logo" width={200} height={60} className="h-14 w-auto mb-4" />
+            <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AIMA%20WHIT-m7VFlS1VuK9sFQyvUg8OT2SLKeKqA8.png" alt="AIMA Logo" width={200} height={60} className="h-14 w-auto mb-4" />
             <p className="text-white/70 leading-relaxed max-w-md">
               Plataforma oficial da AIMA destinada à agilização do processo de legalização em Portugal.
             </p>
