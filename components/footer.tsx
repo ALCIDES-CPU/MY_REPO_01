@@ -11,7 +11,7 @@ export function Footer() {
             Apoios e Financiamento
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 items-center justify-items-center">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors">
+            <div className="backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors bg-white">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/R%20PT-UsUcqcgTWpGh4Iuh8XZV15jxd2SMVO.png"
                 alt="República Portuguesa"
@@ -20,7 +20,7 @@ export function Footer() {
                 className="h-10 w-auto"
               />
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors">
+            <div className="backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors bg-card">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CPT%202020-iUPMLKqARDRBGg9FoaJRBuVTEXAwP6.png"
                 alt="COMPETE 2020"
@@ -29,7 +29,7 @@ export function Footer() {
                 className="h-10 w-auto"
               />
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors col-span-2 md:col-span-1">
+            <div className="backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors col-span-2 md:col-span-1 bg-card">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/C%20UE-o96TqErBlA6hJycCPqLKPRkRASwPca.png"
                 alt="União Europeia - Fundo Social Europeu"
