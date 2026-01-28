@@ -1,4 +1,5 @@
 'use client'
+
 import * as React from 'react'
 import {
   ChevronDownIcon,
@@ -27,12 +28,14 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      // --- CONFIGURAÇÃO DE RESTRIÇÃO DE DATAS ---
-      defaultMonth={new Date(2026, 2)} // Abre o calendário em Março/2026
+      // --- BLOQUEIO DE DATAS ---
+      // Define o mês inicial como Março de 2026
+      defaultMonth={new Date(2026, 2)} 
+      // Desabilita tudo ANTES de 6 de março e tudo DEPOIS de 13 de março
       disabled={[
-        { before: new Date(2026, 2, 9), after: new Date(2026, 2, 13) }
+        { before: new Date(2026, 2, 6), after: new Date(2026, 2, 13) }
       ]}
-      // ------------------------------------------
+      // -------------------------
       className={cn(
         'bg-background group/calendar p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent',
         String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
@@ -123,7 +126,7 @@ function Calendar({
           defaultClassNames.outside,
         ),
         disabled: cn(
-          'text-muted-foreground opacity-50',
+          'text-muted-foreground opacity-50 cursor-not-allowed',
           defaultClassNames.disabled,
         ),
         hidden: cn('invisible', defaultClassNames.hidden),
@@ -195,6 +198,8 @@ function CalendarDayButton({
       ref={ref}
       variant="ghost"
       size="icon"
+      // Adicionado disabled nativo se o modifier estiver presente
+      disabled={modifiers.disabled}
       data-day={day.date.toLocaleDateString()}
       data-selected-single={
         modifiers.selected &&
