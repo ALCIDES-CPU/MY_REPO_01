@@ -66,7 +66,7 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-lg mb-3">Contacto</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Email: info@sefaima.com</li>
+              <li>Email: info@aimasef.com</li>
               <li>Telefone: +351 808 202 653</li>
             </ul>
           </div>
