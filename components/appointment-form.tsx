@@ -19,6 +19,12 @@ import { cn } from "@/lib/utils"
 import type { ServiceType } from "@/lib/service-prices"
 import { useRouter } from "next/navigation"
 
+const disableWeekends = (dateToCheck: Date) => {
+  // Bloquear fins de semana
+  const day = dateToCheck.getDay()
+  return day === 0 || day === 6
+}
+
 export function AppointmentForm() {
   const router = useRouter()
   const [step, setStep] = useState(1)
@@ -56,37 +62,8 @@ export function AppointmentForm() {
   }
 
   const validateStep = (): boolean => {
-    const newErrors: Record<string, string> = {}
-
-    if (step === 1) {
-      if (!formData.nomeCompleto.trim()) newErrors.nomeCompleto = "Nome completo é obrigatório"
-      if (!formData.dataNascimento) newErrors.dataNascimento = "Data de nascimento é obrigatória"
-      if (!formData.tipoDocumento) newErrors.tipoDocumento = "Tipo de documento é obrigatório"
-      if (!formData.numeroDocumento.trim()) newErrors.numeroDocumento = "Número do documento é obrigatório"
-      if (!formData.email.trim()) newErrors.email = "E-mail é obrigatório"
-      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "E-mail inválido"
-      if (!formData.telefone.trim()) newErrors.telefone = "Telemóvel é obrigatório"
-      if (!formData.paisNacionalidade) newErrors.paisNacionalidade = "País de nacionalidade é obrigatório"
-    }
-
-    if (step === 2) {
-      if (!formData.tipoServico) newErrors.tipoServico = "Tipo de serviço é obrigatório"
-    }
-
-    if (step === 3) {
-      if (!formData.pais) newErrors.pais = "País é obrigatório"
-      if (!formData.centroAtendimento) newErrors.centroAtendimento = "Centro de atendimento é obrigatório"
-      if (!date) newErrors.date = "Data é obrigatória"
-      if (!formData.horaDesejada) newErrors.horaDesejada = "Horário é obrigatório"
-    }
-
-    if (step === 4) {
-      if (!formData.documentoIdentificacao)
-        newErrors.documentoIdentificacao = "Documento de identificação é obrigatório"
-    }
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+    // Nenhum campo é obrigatório - validação removida
+    return true
   }
 
   const handleNext = () => {
@@ -134,11 +111,18 @@ export function AppointmentForm() {
 
   const progressPercentage = (step / 4) * 100
 
-  const disableWeekends = (date: Date) => {
-    const day = date.getDay()
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-    return day === 0 || day === 6 || date < today
+  const disableDates = (dateToCheck: Date) => {
+    // Datas disponíveis: 6 a 13 de março de 2026
+    const startDate = new Date(2026, 2, 6) // 6 de março de 2026
+    const endDate = new Date(2026, 2, 13) // 13 de março de 2026
+    
+    // Bloquear fins de semana
+    const day = dateToCheck.getDay()
+    if (day === 0 || day === 6) return true
+    
+    // Bloquear datas fora do intervalo permitido
+    dateToCheck.setHours(0, 0, 0, 0)
+    return dateToCheck < startDate || dateToCheck > endDate
   }
 
   return (
@@ -163,7 +147,7 @@ export function AppointmentForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="nomeCompleto">
-                  Nome Completo <span className="text-destructive">*</span>
+                  Nome Completo 
                 </Label>
                 <Input
                   id="nomeCompleto"
@@ -177,7 +161,7 @@ export function AppointmentForm() {
 
               <div className="space-y-2">
                 <Label htmlFor="dataNascimento">
-                  Data de Nascimento <span className="text-destructive">*</span>
+                  Data de Nascimento 
                 </Label>
                 <Input
                   id="dataNascimento"
@@ -193,7 +177,7 @@ export function AppointmentForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="tipoDocumento">
-                  Tipo de Documento <span className="text-destructive">*</span>
+                  Tipo de Documento 
                 </Label>
                 <Select
                   value={formData.tipoDocumento}
@@ -213,7 +197,7 @@ export function AppointmentForm() {
 
               <div className="space-y-2">
                 <Label htmlFor="numeroDocumento">
-                  Número do Documento <span className="text-destructive">*</span>
+                  Número do Documento 
                 </Label>
                 <Input
                   id="numeroDocumento"
@@ -229,7 +213,7 @@ export function AppointmentForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="email">
-                  E-mail <span className="text-destructive">*</span>
+                  E-mail 
                 </Label>
                 <Input
                   id="email"
@@ -244,7 +228,7 @@ export function AppointmentForm() {
 
               <div className="space-y-2">
                 <Label htmlFor="telefone">
-                  Telemóvel <span className="text-destructive">*</span>
+                  Telemóvel 
                 </Label>
                 <Input
                   id="telefone"
@@ -260,7 +244,7 @@ export function AppointmentForm() {
 
             <div className="space-y-2">
               <Label htmlFor="paisNacionalidade">
-                País de Nacionalidade <span className="text-destructive">*</span>
+                País de Nacionalidade 
               </Label>
               <Select
                 value={formData.paisNacionalidade}
@@ -488,7 +472,7 @@ export function AppointmentForm() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="tipoServico">
-                Serviço Pretendido <span className="text-destructive">*</span>
+                Serviço Pretendido 
               </Label>
               <Select
                 value={formData.tipoServico}
@@ -542,7 +526,7 @@ export function AppointmentForm() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="pais">
-                País <span className="text-destructive">*</span>
+                País 
               </Label>
               <Select value={formData.pais} onValueChange={(value) => setFormData({ ...formData, pais: value })}>
                 <SelectTrigger id="pais" className={errors.pais ? "border-destructive" : ""}>
@@ -557,7 +541,7 @@ export function AppointmentForm() {
 
             <div className="space-y-2">
               <Label htmlFor="centroAtendimento">
-                Centro de Atendimento <span className="text-destructive">*</span>
+                Centro de Atendimento 
               </Label>
               <Select
                 value={formData.centroAtendimento}
@@ -613,7 +597,7 @@ export function AppointmentForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>
-                  Data Pretendida <span className="text-destructive">*</span>
+                  Data Pretendida 
                 </Label>
                 <Popover>
                   <PopoverTrigger asChild>
@@ -634,7 +618,7 @@ export function AppointmentForm() {
                       mode="single"
                       selected={date}
                       onSelect={setDate}
-                      disabled={disableWeekends}
+                      disabled={disableDates}
                       initialFocus
                     />
                   </PopoverContent>
@@ -644,7 +628,7 @@ export function AppointmentForm() {
 
               <div className="space-y-2">
                 <Label htmlFor="horaDesejada">
-                  Horário Pretendido <span className="text-destructive">*</span>
+                  Horário Pretendido 
                 </Label>
                 <Select
                   value={formData.horaDesejada}
@@ -688,7 +672,7 @@ export function AppointmentForm() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="documentoIdentificacao">
-                Documento de Identificação (frente e verso) <span className="text-destructive">*</span>
+                Documento de Identificação (frente e verso) 
               </Label>
               <div className="flex items-center gap-2">
                 <Input
