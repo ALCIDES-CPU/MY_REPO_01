@@ -12,7 +12,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: "E-mail",
-    details: ["info@sefaima.com", "Resposta em 48 horas úteis"],
+    details: ["info@aimasef.com", "Resposta em 48 horas úteis"],
   },
   {
     icon: Globe,
