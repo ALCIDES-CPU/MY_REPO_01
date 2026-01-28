@@ -10,32 +10,14 @@ export function Footer() {
           <h3 className="text-sm font-medium text-center mb-8 text-white/70 uppercase tracking-wider">
             Apoios e Financiamento
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 items-center justify-items-center">
+          <div className="flex flex-wrap justify-center items-center gap-8">
             <div className="backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors bg-white">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/R%20PT-UsUcqcgTWpGh4Iuh8XZV15jxd2SMVO.png"
-                alt="República Portuguesa"
-                width={180}
-                height={50}
-                className="h-10 w-auto"
-              />
-            </div>
-            <div className="backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors bg-card">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CPT%202020-iUPMLKqARDRBGg9FoaJRBuVTEXAwP6.png"
-                alt="COMPETE 2020"
-                width={180}
-                height={50}
-                className="h-10 w-auto"
-              />
-            </div>
-            <div className="backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors col-span-2 md:col-span-1 bg-card">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/C%20UE-o96TqErBlA6hJycCPqLKPRkRASwPca.png"
-                alt="União Europeia - Fundo Social Europeu"
-                width={200}
-                height={50}
-                className="h-10 w-auto"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/PT%202020-oaiSRvVwOROeJBbLK7jKQAov01GkNU.png"
+                alt="Portugal 2020 - União Europeia - Fundo Europeu de Desenvolvimento Regional"
+                width={400}
+                height={80}
+                className="h-16 w-auto"
               />
             </div>
           </div>
