@@ -28,6 +28,12 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
+      // --- CONFIGURAÇÃO DE RESTRIÇÃO DE DATAS ---
+      defaultMonth={new Date(2026, 2)} // Abre o calendário em Março/2026
+      disabled={[
+        { before: new Date(2026, 2, 9), after: new Date(2026, 2, 13) }
+      ]}
+      // ------------------------------------------
       className={cn(
         'bg-background group/calendar p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent',
         String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
