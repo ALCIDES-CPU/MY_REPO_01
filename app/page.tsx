@@ -15,7 +15,7 @@ export default function HomePage() {
         {/* Hero Section */}
         <section className="relative min-h-[600px] md:min-h-[700px] overflow-hidden">
           <Image
-            src="https://aima.gov.pt/media/pages/home/481e7f24bc-1706827832/europa_1-1200x-q65.jpg"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/europa-WAsralGmtlU8AJYJFB5WfuDiOvq8J9.jpg"
             alt="Banner AIMA - Agência para a Integração, Migrações e Asilo"
             fill
             className="object-cover"
