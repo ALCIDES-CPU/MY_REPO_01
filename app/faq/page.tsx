@@ -59,7 +59,7 @@ const faqs = [
   {
     question: "O pagamento é reembolsável?",
     answer:
-      "Pagamentos são reembolsáveis apenas em caso de cancelamento com mais de 48 horas de antecedência ou se o serviço não puder ser prestado por motivos imputáveis à AIMA. Contacte o suporte atraves do email (info@sefaima.com) para solicitar reembolso.",
+      "Pagamentos são reembolsáveis apenas em caso de cancelamento com mais de 48 horas de antecedência ou se o serviço não puder ser prestado por motivos imputáveis à AIMA. Contacte o suporte atraves do email (info@servicosaima.com) para solicitar reembolso.",
   },
   {
     question: "Preciso de levar os documentos originais?",

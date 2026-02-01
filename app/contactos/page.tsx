@@ -12,12 +12,12 @@ const contactInfo = [
   {
     icon: Mail,
     title: "E-mail",
-    details: ["info@aimasef.com", "Resposta em 48 horas úteis"],
+    details: ["info@servicosaima.com", "Resposta em 48 horas úteis"],
   },
   {
     icon: Globe,
     title: "Website Oficial",
-    details: ["www.sefaima.com", "Informações e recursos oficiais"],
+    details: ["www.servicosaima.com", "Informações e recursos oficiais"],
   },
   {
     icon: Clock,
