@@ -100,7 +100,7 @@ export function Footer() {
             <h3 className="font-semibold text-lg mb-5 text-white">Contacto</h3>
             <ul className="space-y-3 text-white/70">
               <li className="flex items-center gap-2">
-                Email: info@aimasef.com
+                Email: info@servicosaima.com
               </li>
               <li className="flex items-center gap-2">
                 Telefone: +351 808 202 653
