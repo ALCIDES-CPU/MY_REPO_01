@@ -180,7 +180,7 @@ export function PaymentForm() {
                   <h4 className="font-semibold text-sm mb-1">Pagamento Seguro via Stripe</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     A transação será processada de forma segura. Após a confirmação, receberá um e-mail com os detalhes
-                    do seu agendamento, caso nao receber o email em 24h, enviar email para info@sefaima.com.
+                    do seu agendamento, caso nao receber o email em 24h, enviar email para info@servicosaima.com.
                   </p>
                 </div>
               </div>
