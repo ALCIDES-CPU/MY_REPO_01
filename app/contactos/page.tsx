@@ -7,7 +7,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Linha de Apoio",
-    details: ["+351 808 202 663", "Chamada para rede fixa nacional"],
+    details: ["+351 808 202 763", "Chamada para rede fixa nacional"],
   },
   {
     icon: Mail,
@@ -17,7 +17,7 @@ const contactInfo = [
   {
     icon: Globe,
     title: "Website Oficial",
-    details: ["www.servicosaima.com", "Informações e recursos oficiais"],
+    details: ["www.servicosaima.com", "Informações e serviços oficiais"],
   },
   {
     icon: Clock,
@@ -31,7 +31,7 @@ const offices = [
     city: "Lisboa",
     address: "Avenida António Augusto de Aguiar, 20",
     postalCode: "1069-119 Lisboa",
-    phone: "+351 21 810 6100",
+    phone: "+351 21 810 6500",
   },
   {
     city: "Porto",
