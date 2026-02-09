@@ -1,9 +1,9 @@
 export const SERVICE_PRICES = {
-  "agendamento-geral": 83.90,
-  "renovacao-autorizacao": 83.90,
-  "primeira-autorizacao": 83.90,
-  "reagrupamento-familiar": 83.90,
-  "informacao-consulta": 83.90,
+  "agendamento-geral": 59.10,
+  "renovacao-autorizacao": 59.10,
+  "primeira-autorizacao": 59.10,
+  "reagrupamento-familiar": 59.10,
+  "informacao-consulta": 59.10,
   outros: 83.90,
 } as const
 
