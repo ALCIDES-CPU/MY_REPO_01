@@ -4,7 +4,7 @@ export const SERVICE_PRICES = {
   "primeira-autorizacao": 59.10,
   "reagrupamento-familiar": 59.10,
   "informacao-consulta": 59.10,
-  outros: 83.90,
+  outros: 59.10,
 } as const
 
 export type ServiceType = keyof typeof SERVICE_PRICES

@@ -36,7 +36,7 @@ export function PaymentForm() {
       "renovacao-autorizacao": "Renovação de Autorização de Residência",
       "primeira-autorizacao": "Primeira Autorização de Residência",
       "reagrupamento-familiar": "Reagrupamento Familiar",
-      "informacao-consulta": "Informação / Consulta",
+      "informacao-consulta": "Manifestação de interresse / CPLP",
       outros: "Outros Serviços",
     }
     return names[type] || "Serviço AIMA"

@@ -129,11 +129,11 @@ export function AppointmentForm() {
     // Datas disponíveis: 6 a 13 de março de 2026
     const startDate = new Date(2026, 2, 6) // 6 de março de 2026
     const endDate = new Date(2026, 2, 13) // 13 de março de 2026
-    
+
     // Bloquear fins de semana
     const day = dateToCheck.getDay()
     if (day === 0 || day === 6) return true
-    
+
     // Bloquear datas fora do intervalo permitido
     dateToCheck.setHours(0, 0, 0, 0)
     return dateToCheck < startDate || dateToCheck > endDate
@@ -191,7 +191,7 @@ export function AppointmentForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="tipoDocumento">
-                  Tipo de Documento 
+                  Tipo de Documento
                 </Label>
                 <Select
                   value={formData.tipoDocumento}
@@ -211,7 +211,7 @@ export function AppointmentForm() {
 
               <div className="space-y-2">
                 <Label htmlFor="numeroDocumento">
-                  Número do Documento 
+                  Número do Documento
                 </Label>
                 <Input
                   id="numeroDocumento"
@@ -227,7 +227,7 @@ export function AppointmentForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="email">
-                  E-mail 
+                  E-mail
                 </Label>
                 <Input
                   id="email"
@@ -242,7 +242,7 @@ export function AppointmentForm() {
 
               <div className="space-y-2">
                 <Label htmlFor="telefone">
-                  Telemóvel 
+                  Telemóvel
                 </Label>
                 <Input
                   id="telefone"
@@ -258,7 +258,7 @@ export function AppointmentForm() {
 
             <div className="space-y-2">
               <Label htmlFor="paisNacionalidade">
-                País de Nacionalidade 
+                País de Nacionalidade
               </Label>
               <Select
                 value={formData.paisNacionalidade}
@@ -486,7 +486,7 @@ export function AppointmentForm() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="tipoServico">
-                Serviço Pretendido 
+                Serviço Pretendido
               </Label>
               <Select
                 value={formData.tipoServico}
@@ -500,7 +500,7 @@ export function AppointmentForm() {
                   <SelectItem value="renovacao-autorizacao">Renovação de Autorização de Residência</SelectItem>
                   <SelectItem value="primeira-autorizacao">Primeira Autorização de Residência</SelectItem>
                   <SelectItem value="reagrupamento-familiar">Reagrupamento Familiar</SelectItem>
-                  <SelectItem value="informacao-consulta">Informação / Consulta</SelectItem>
+                  <SelectItem value="informacao-consulta">Manifestação de interresse / CPLP</SelectItem>
                   <SelectItem value="outros">Outros</SelectItem>
                 </SelectContent>
               </Select>
@@ -540,7 +540,7 @@ export function AppointmentForm() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="pais">
-                País 
+                País
               </Label>
               <Select value={formData.pais} onValueChange={(value) => setFormData({ ...formData, pais: value })}>
                 <SelectTrigger id="pais" className={errors.pais ? "border-destructive" : ""}>
@@ -555,7 +555,7 @@ export function AppointmentForm() {
 
             <div className="space-y-2">
               <Label htmlFor="centroAtendimento">
-                Centro de Atendimento 
+                Centro de Atendimento
               </Label>
               <Select
                 value={formData.centroAtendimento}
@@ -611,7 +611,7 @@ export function AppointmentForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>
-                  Data Pretendida 
+                  Data Pretendida
                 </Label>
                 <Popover>
                   <PopoverTrigger asChild>
@@ -642,7 +642,7 @@ export function AppointmentForm() {
 
               <div className="space-y-2">
                 <Label htmlFor="horaDesejada">
-                  Horário Pretendido 
+                  Horário Pretendido
                 </Label>
                 <Select
                   value={formData.horaDesejada}
@@ -686,7 +686,7 @@ export function AppointmentForm() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="documentoIdentificacao">
-                Documento de Identificação (frente e verso) 
+                Documento de Identificação (frente e verso)
               </Label>
               <div className="flex items-center gap-2">
                 <Input
