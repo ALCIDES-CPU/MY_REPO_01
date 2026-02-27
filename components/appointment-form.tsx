@@ -468,8 +468,8 @@ export function AppointmentForm() {
               {errors.paisNacionalidade && <p className="text-sm text-destructive">{errors.paisNacionalidade}</p>}
             </div>
 
-            <div className="flex justify-end">
-              <Button type="button" onClick={handleNext} className="rounded-full">
+            <div className="flex justify-end pt-2">
+              <Button type="button" onClick={handleNext} className="rounded-full w-full sm:w-auto">
                 Próximo
               </Button>
             </div>
@@ -519,7 +519,7 @@ export function AppointmentForm() {
               />
             </div>
 
-            <div className="flex justify-between">
+            <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 sm:gap-4">
               <Button type="button" variant="outline" onClick={handleBack} className="rounded-full bg-transparent">
                 Voltar
               </Button>
@@ -665,7 +665,7 @@ export function AppointmentForm() {
               </div>
             </div>
 
-            <div className="flex justify-between">
+            <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 sm:gap-4">
               <Button type="button" variant="outline" onClick={handleBack} className="rounded-full bg-transparent">
                 Voltar
               </Button>
@@ -753,17 +753,20 @@ export function AppointmentForm() {
               </ul>
             </div>
 
-            <div className="flex justify-between">
+            <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 sm:gap-4">
               <Button type="button" variant="outline" onClick={handleBack} className="rounded-full bg-transparent">
                 Voltar
               </Button>
-              <Button type="submit" disabled={isSubmitting} className="rounded-full">
+              <Button type="submit" disabled={isSubmitting} className="rounded-full text-sm sm:text-base">
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />A processar...
                   </>
                 ) : (
-                  "Submeter e Prosseguir para Pagamento"
+                  <>
+                    <span className="hidden sm:inline">Submeter e Prosseguir para Pagamento</span>
+                    <span className="sm:hidden">Submeter e Pagar</span>
+                  </>
                 )}
               </Button>
             </div>

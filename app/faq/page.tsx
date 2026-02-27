@@ -75,20 +75,20 @@ export default function FAQPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-[#4A1D6A] py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+        <section className="bg-[#4A1D6A] py-12 sm:py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold tracking-widest uppercase text-white/50 mb-4">Ajuda</p>
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white text-balance">Perguntas Frequentes</h1>
-              <p className="text-lg text-white/70 leading-relaxed">
+              <p className="text-xs font-semibold tracking-widest uppercase text-white/50 mb-3 sm:mb-4">Ajuda</p>
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 sm:mb-6 text-white text-balance">Perguntas Frequentes</h1>
+              <p className="text-base sm:text-lg text-white/70 leading-relaxed">
                 Encontre respostas para as perguntas mais comuns sobre o processo de agendamento AIMA.
               </p>
             </div>
           </div>
         </section>
 
-        <section className="py-16 md:py-24">
-          <div className="max-w-3xl mx-auto px-6 sm:px-10 lg:px-16">
+        <section className="py-12 sm:py-16 md:py-24">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
             <Card className="border border-border shadow-none">
               <CardContent className="pt-6">
                 <Accordion type="single" collapsible className="w-full">

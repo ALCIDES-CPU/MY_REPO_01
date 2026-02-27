@@ -10,15 +10,15 @@ export default function ConfirmacaoPage() {
     <div className="min-h-screen flex flex-col">
       <Navigation />
 
-      <main className="flex-1 py-12">
+      <main className="flex-1 py-8 sm:py-12">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Card>
             <CardHeader className="text-center">
               <div className="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
                 <CheckCircle className="w-12 h-12 text-green-600" />
               </div>
-              <CardTitle className="text-3xl">Agendamento pendente a confirmação de pagamento!</CardTitle>
-              <CardDescription className="text-base">O seu agendamento foi processado com sucesso, estamos aguardando a confirmação do seu pagamento</CardDescription>
+              <CardTitle className="text-xl sm:text-2xl md:text-3xl text-balance">Agendamento pendente a confirmação de pagamento!</CardTitle>
+              <CardDescription className="text-sm sm:text-base">O seu agendamento foi processado com sucesso, estamos aguardando a confirmação do seu pagamento</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="bg-muted/50 p-6 rounded-lg space-y-4">

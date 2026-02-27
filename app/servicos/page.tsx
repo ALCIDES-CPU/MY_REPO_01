@@ -60,12 +60,12 @@ export default function ServicosPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-[#4A1D6A] py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+        <section className="bg-[#4A1D6A] py-12 sm:py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold tracking-widest uppercase text-white/50 mb-4">Servicos Disponiveis</p>
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white text-balance">Tipos de Servicos</h1>
-              <p className="text-lg text-white/70 leading-relaxed">
+              <p className="text-xs font-semibold tracking-widest uppercase text-white/50 mb-3 sm:mb-4">Servicos Disponiveis</p>
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 sm:mb-6 text-white text-balance">Tipos de Servicos</h1>
+              <p className="text-base sm:text-lg text-white/70 leading-relaxed">
                 Conheca os servicos disponiveis para agendamento online. Cada servico tem requisitos especificos de
                 documentacao.
               </p>
@@ -74,9 +74,9 @@ export default function ServicosPage() {
         </section>
 
         {/* Services Grid */}
-        <section className="py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <section className="py-12 sm:py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               {services.map((service, index) => (
                 <Card
                   key={index}
@@ -122,15 +122,15 @@ export default function ServicosPage() {
             </div>
 
             {/* CTA Section */}
-            <div className="mt-20">
-              <div className="bg-secondary rounded-3xl p-10 md:p-16 text-center relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            <div className="mt-12 sm:mt-20">
+              <div className="bg-secondary rounded-2xl sm:rounded-3xl p-8 sm:p-10 md:p-16 text-center relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                 <div className="relative z-10">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground text-balance">Pronto para Agendar?</h3>
-                  <p className="text-muted-foreground mb-8 leading-relaxed max-w-xl mx-auto">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-foreground text-balance">Pronto para Agendar?</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed max-w-xl mx-auto">
                     Escolha o servico que necessita e complete o agendamento online de forma rapida e segura.
                   </p>
-                  <Button asChild size="lg" className="shadow-lg bg-[#4A1D6A] text-white hover:bg-[#3A0D5A] px-10 h-13 rounded-full font-semibold">
+                  <Button asChild size="lg" className="shadow-lg bg-[#4A1D6A] text-white hover:bg-[#3A0D5A] px-8 sm:px-10 h-12 sm:h-13 rounded-full font-semibold text-sm sm:text-base">
                     <Link href="/agendar" className="flex items-center gap-2">
                       Agendar Atendimento
                       <ArrowRight className="w-5 h-5" />

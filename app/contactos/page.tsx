@@ -60,12 +60,12 @@ export default function ContactosPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-[#4A1D6A] py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+        <section className="bg-[#4A1D6A] py-12 sm:py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold tracking-widest uppercase text-white/50 mb-4">Fale Connosco</p>
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white text-balance">Contactos</h1>
-              <p className="text-lg text-white/70 leading-relaxed">
+              <p className="text-xs font-semibold tracking-widest uppercase text-white/50 mb-3 sm:mb-4">Fale Connosco</p>
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 sm:mb-6 text-white text-balance">Contactos</h1>
+              <p className="text-base sm:text-lg text-white/70 leading-relaxed">
                 Entre em contacto connosco atraves dos seguintes canais. Estamos disponiveis para ajudar com as suas
                 questoes.
               </p>
@@ -73,10 +73,10 @@ export default function ContactosPage() {
           </div>
         </section>
 
-        <section className="py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+        <section className="py-12 sm:py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
             {/* Contact Information */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-12 sm:mb-16">
               {contactInfo.map((contact, index) => (
                 <Card key={index} className="border border-border hover:border-accent/30 shadow-none hover:shadow-lg transition-all duration-300">
                   <CardHeader className="pb-3">
@@ -104,8 +104,8 @@ export default function ContactosPage() {
             {/* Offices */}
             <div>
               <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-3">Localizacoes</p>
-              <h2 className="text-2xl font-bold mb-8 text-foreground">Centros de Atendimento</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <h2 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-foreground">Centros de Atendimento</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {offices.map((office, index) => (
                   <Card key={index} className="border border-border hover:border-accent/30 shadow-none hover:shadow-lg transition-all duration-300">
                     <CardHeader className="pb-3">

@@ -11,15 +11,15 @@ export function Navigation() {
 
   return (
     <nav className="sticky top-0 z-50 bg-[#4A1D6A]/95 backdrop-blur-md border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-        <div className="flex justify-between items-center h-18">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
+        <div className="flex justify-between items-center h-16 sm:h-18">
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AIMA%20WHIT-IsJtsie9npT4L17xRWtuIA3HZoF2y4.png"
               alt="AIMA Logo"
               width={160}
               height={48}
-              className="h-10 w-auto"
+              className="h-8 sm:h-10 w-auto"
             />
           </Link>
 

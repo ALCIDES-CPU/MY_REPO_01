@@ -8,11 +8,11 @@ export function Footer() {
     <footer className="bg-[#2A0D3A] text-white mt-auto">
       {/* Partners Section */}
       <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-10">
-          <p className="text-xs font-medium text-center mb-8 text-white/50 uppercase tracking-widest">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-8 sm:py-10">
+          <p className="text-xs font-medium text-center mb-6 sm:mb-8 text-white/50 uppercase tracking-widest">
             Apoios e Financiamento
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 items-center justify-items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 items-center justify-items-center">
             <div className="bg-white rounded-lg p-3 hover:shadow-lg transition-shadow">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/R%20PT-UsUcqcgTWpGh4Iuh8XZV15jxd2SMVO.png"
@@ -49,7 +49,7 @@ export function Footer() {
                 className="h-8 w-auto"
               />
             </div>
-            <div className="bg-white rounded-lg p-3 hover:shadow-lg transition-shadow col-span-2 md:col-span-1">
+            <div className="bg-white rounded-lg p-3 hover:shadow-lg transition-shadow col-span-2 sm:col-span-1">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/aima_horizontal_cor-rIl9RarT6CEu1ZKBjIgyK63jrgQiBj.png"
                 alt="AIMA - Agencia para a Integracao, Migracoes e Asilo"
@@ -63,9 +63,9 @@ export function Footer() {
       </div>
 
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div className="md:col-span-2">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+          <div className="sm:col-span-2">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AIMA%20WHIT-m7VFlS1VuK9sFQyvUg8OT2SLKeKqA8.png"
               alt="AIMA Logo"
@@ -116,7 +116,7 @@ export function Footer() {
 
       {/* Copyright */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-6 text-center text-xs text-white/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-5 sm:py-6 text-center text-xs text-white/40">
           <p>&copy; {new Date().getFullYear()} AIMA - Agencia para a Integracao, Migracoes e Asilo. Todos os direitos reservados.</p>
         </div>
       </div>
