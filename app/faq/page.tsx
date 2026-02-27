@@ -14,7 +14,7 @@ const faqs = [
   {
     question: "Qual e o custo do agendamento?",
     answer:
-      "O valor do agendamento e de 59.10 EUR, que inclui a taxa de processamento e servico. O pagamento e efetuado de forma segura atraves da plataforma DodoPayments.",
+      "O valor do agendamento e de 83.10 EUR, que inclui a taxa de processamento e servico. O pagamento e efetuado de forma segura atraves da plataforma DodoPayments.",
   },
   {
     question: "Que documentos preciso de apresentar?",
