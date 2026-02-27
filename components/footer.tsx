@@ -5,57 +5,57 @@ import Image from "next/image"
 
 export function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-[#4A1D6A] to-[#3A0D5A] text-white mt-auto">
+    <footer className="bg-[#2A0D3A] text-white mt-auto">
       {/* Partners Section */}
       <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <h3 className="text-sm font-medium text-center mb-8 text-white/70 uppercase tracking-wider">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-10">
+          <p className="text-xs font-medium text-center mb-8 text-white/50 uppercase tracking-widest">
             Apoios e Financiamento
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 items-center justify-items-center">
-            <div className="backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors bg-white">
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 items-center justify-items-center">
+            <div className="bg-white rounded-lg p-3 hover:shadow-lg transition-shadow">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/R%20PT-UsUcqcgTWpGh4Iuh8XZV15jxd2SMVO.png"
-                alt="República Portuguesa"
-                width={180}
-                height={50}
-                className="h-10 w-auto"
+                alt="Republica Portuguesa"
+                width={160}
+                height={44}
+                className="h-8 w-auto"
               />
             </div>
-            <div className="backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors bg-white">
+            <div className="bg-white rounded-lg p-3 hover:shadow-lg transition-shadow">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CPT%202020-iUPMLKqARDRBGg9FoaJRBuVTEXAwP6.png"
                 alt="COMPETE 2020"
-                width={180}
-                height={50}
-                className="h-10 w-auto"
+                width={160}
+                height={44}
+                className="h-8 w-auto"
               />
             </div>
-            <div className="backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors bg-white">
+            <div className="bg-white rounded-lg p-3 hover:shadow-lg transition-shadow">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/C%20UE-o96TqErBlA6hJycCPqLKPRkRASwPca.png"
-                alt="União Europeia - Fundo Social Europeu"
-                width={200}
-                height={50}
-                className="h-10 w-auto"
+                alt="Uniao Europeia - Fundo Social Europeu"
+                width={180}
+                height={44}
+                className="h-8 w-auto"
               />
             </div>
-            <div className="backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors bg-white">
+            <div className="bg-white rounded-lg p-3 hover:shadow-lg transition-shadow">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/PT%202020-oaiSRvVwOROeJBbLK7jKQAov01GkNU.png"
-                alt="Portugal 2020 - União Europeia Fundo Europeu de Desenvolvimento Regional"
-                width={280}
-                height={50}
-                className="h-10 w-auto"
+                alt="Portugal 2020 - Uniao Europeia Fundo Europeu de Desenvolvimento Regional"
+                width={240}
+                height={44}
+                className="h-8 w-auto"
               />
             </div>
-            <div className="backdrop-blur-sm rounded-xl p-4 hover:bg-white/15 transition-colors bg-white col-span-2 md:col-span-1">
+            <div className="bg-white rounded-lg p-3 hover:shadow-lg transition-shadow col-span-2 md:col-span-1">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/aima_horizontal_cor-rIl9RarT6CEu1ZKBjIgyK63jrgQiBj.png"
-                alt="AIMA - Agência para a Integração, Migrações e Asilo"
-                width={200}
-                height={50}
-                className="h-10 w-auto"
+                alt="AIMA - Agencia para a Integracao, Migracoes e Asilo"
+                width={180}
+                height={44}
+                className="h-8 w-auto"
               />
             </div>
           </div>
@@ -63,35 +63,41 @@ export function Footer() {
       </div>
 
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
-            <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AIMA%20WHIT-m7VFlS1VuK9sFQyvUg8OT2SLKeKqA8.png" alt="AIMA Logo" width={200} height={60} className="h-14 w-auto mb-4" />
-            <p className="text-white/70 leading-relaxed max-w-md">
-              Plataforma oficial da AIMA destinada à agilização do processo de legalização em Portugal.
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AIMA%20WHIT-m7VFlS1VuK9sFQyvUg8OT2SLKeKqA8.png"
+              alt="AIMA Logo"
+              width={160}
+              height={48}
+              className="h-10 w-auto mb-5"
+            />
+            <p className="text-white/60 leading-relaxed max-w-md text-sm">
+              Plataforma oficial da AIMA destinada a agilizacao do processo de legalizacao em Portugal.
             </p>
           </div>
 
           <div>
-            <h3 className="font-semibold text-lg mb-5 text-white">Links Úteis</h3>
+            <h3 className="font-semibold text-sm mb-5 text-white/90 uppercase tracking-wider">Links Uteis</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/servicos" className="text-white/70 hover:text-white transition-colors flex items-center gap-2">
-                  Tipos de Serviços
+                <Link href="/servicos" className="text-white/60 hover:text-white transition-colors text-sm">
+                  Tipos de Servicos
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-white/70 hover:text-white transition-colors flex items-center gap-2">
+                <Link href="/faq" className="text-white/60 hover:text-white transition-colors text-sm">
                   Perguntas Frequentes
                 </Link>
               </li>
               <li>
-                <Link href="/contactos" className="text-white/70 hover:text-white transition-colors flex items-center gap-2">
+                <Link href="/contactos" className="text-white/60 hover:text-white transition-colors text-sm">
                   Contactos
                 </Link>
               </li>
               <li>
-                <Link href="/agendar" className="text-white/70 hover:text-white transition-colors flex items-center gap-2">
+                <Link href="/agendar" className="text-white/60 hover:text-white transition-colors text-sm">
                   Agendar Atendimento
                 </Link>
               </li>
@@ -99,14 +105,10 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold text-lg mb-5 text-white">Contacto</h3>
-            <ul className="space-y-3 text-white/70">
-              <li className="flex items-center gap-2">
-                Email: info@servicosaima.com
-              </li>
-              <li className="flex items-center gap-2">
-                Telefone: +351 808 202 653
-              </li>
+            <h3 className="font-semibold text-sm mb-5 text-white/90 uppercase tracking-wider">Contacto</h3>
+            <ul className="space-y-3 text-white/60 text-sm">
+              <li>info@servicosaima.com</li>
+              <li>+351 808 202 653</li>
             </ul>
           </div>
         </div>
@@ -114,8 +116,8 @@ export function Footer() {
 
       {/* Copyright */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-white/60">
-          <p>&copy; {new Date().getFullYear()} AIMA - Agência para a Integração, Migrações e Asilo. Todos os direitos reservados.</p>
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-6 text-center text-xs text-white/40">
+          <p>&copy; {new Date().getFullYear()} AIMA - Agencia para a Integracao, Migracoes e Asilo. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>

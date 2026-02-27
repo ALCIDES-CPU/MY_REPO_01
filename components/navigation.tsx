@@ -10,75 +10,96 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="shadow-lg sticky top-0 z-50 bg-gradient-to-r from-[#4A1D6A] to-[#5A2D7A] text-background bg-[rgba(62,36,125,1)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+    <nav className="sticky top-0 z-50 bg-[#4A1D6A]/95 backdrop-blur-md border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+        <div className="flex justify-between items-center h-18">
           <Link href="/" className="flex items-center gap-3">
-            <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AIMA%20WHIT-IsJtsie9npT4L17xRWtuIA3HZoF2y4.png" alt="AIMA Logo" width={200} height={60} className="h-14 w-auto" />
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AIMA%20WHIT-IsJtsie9npT4L17xRWtuIA3HZoF2y4.png"
+              alt="AIMA Logo"
+              width={160}
+              height={48}
+              className="h-10 w-auto"
+            />
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-white/90 hover:text-white transition-colors font-medium">
+          <div className="hidden md:flex items-center gap-1">
+            <Link
+              href="/"
+              className="text-white/70 hover:text-white transition-colors text-sm font-medium px-4 py-2 rounded-full hover:bg-white/10"
+            >
               Home
             </Link>
-            <Link href="/servicos" className="text-white/90 hover:text-white transition-colors font-medium">
-              Serviços
+            <Link
+              href="/servicos"
+              className="text-white/70 hover:text-white transition-colors text-sm font-medium px-4 py-2 rounded-full hover:bg-white/10"
+            >
+              Servicos
             </Link>
-            <Link href="/contactos" className="text-white/90 hover:text-white transition-colors font-medium">
+            <Link
+              href="/contactos"
+              className="text-white/70 hover:text-white transition-colors text-sm font-medium px-4 py-2 rounded-full hover:bg-white/10"
+            >
               Contactos
             </Link>
-            <Link href="/faq" className="text-white/90 hover:text-white transition-colors font-medium">
+            <Link
+              href="/faq"
+              className="text-white/70 hover:text-white transition-colors text-sm font-medium px-4 py-2 rounded-full hover:bg-white/10"
+            >
               FAQ
             </Link>
-            <Button asChild className="bg-white text-[#4A1D6A] hover:bg-white/90 font-semibold shadow-md">
-              <Link href="/agendar">Agendar</Link>
-            </Button>
+            <div className="ml-3">
+              <Button asChild className="bg-white text-[#4A1D6A] hover:bg-white/90 font-semibold text-sm h-9 px-6 rounded-full">
+                <Link href="/agendar">Agendar</Link>
+              </Button>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-xl hover:bg-white/10 transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors text-white"
+            aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
           >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden pb-6 space-y-2 border-t border-white/10 pt-4">
+          <div className="md:hidden pb-6 space-y-1 border-t border-white/10 pt-4">
             <Link
               href="/"
-              className="block py-3 px-4 hover:bg-white/10 rounded-xl transition-colors font-medium"
+              className="block py-3 px-4 hover:bg-white/10 rounded-lg transition-colors text-sm font-medium text-white/80 hover:text-white"
               onClick={() => setIsOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/agendar"
-              className="block py-3 px-4 hover:bg-white/10 rounded-xl transition-colors font-medium"
+              className="block py-3 px-4 hover:bg-white/10 rounded-lg transition-colors text-sm font-medium text-white/80 hover:text-white"
               onClick={() => setIsOpen(false)}
             >
               Agendar Atendimento
             </Link>
             <Link
               href="/servicos"
-              className="block py-3 px-4 hover:bg-white/10 rounded-xl transition-colors font-medium"
+              className="block py-3 px-4 hover:bg-white/10 rounded-lg transition-colors text-sm font-medium text-white/80 hover:text-white"
               onClick={() => setIsOpen(false)}
             >
-              Serviços
+              Servicos
             </Link>
             <Link
               href="/contactos"
-              className="block py-3 px-4 hover:bg-white/10 rounded-xl transition-colors font-medium"
+              className="block py-3 px-4 hover:bg-white/10 rounded-lg transition-colors text-sm font-medium text-white/80 hover:text-white"
               onClick={() => setIsOpen(false)}
             >
               Contactos
             </Link>
             <Link
               href="/faq"
-              className="block py-3 px-4 hover:bg-white/10 rounded-xl transition-colors font-medium"
+              className="block py-3 px-4 hover:bg-white/10 rounded-lg transition-colors text-sm font-medium text-white/80 hover:text-white"
               onClick={() => setIsOpen(false)}
             >
               FAQ
